@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — The Gardens at Zion</title>
+  <meta name="description" content="Cultivating resilient gardens through research-based horticulture and community stewardship in Bexar County.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#page">Skip to Content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="site-title" href="index.html">The Gardens at Zion</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+          <a href="home.html">Home</a>
+          <a href="the-gardens.html">The Gardens</a>
+          <a href="the-gardening-school.html">The Gardening School</a>
+          <a href="podcast.html">Podcast</a>
+          <a href="resources.html">Resources</a>
+          <a href="about.html">Bio</a>
+          <a href="contact.html" aria-current="page">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="page">
+    <section class="section">
+      <div class="container contact-grid">
+        <div>
+          <p class="lead">If you have a question or would like more information, send me an email.</p>
+          <form class="contact-form" data-mailto="thegardensatzion@gmail.com" data-subject="Question from the website">
+            <fieldset>
+              <legend>Name</legend>
+              <div class="field-row">
+                <label>First Name <span class="req">(required)</span>
+                  <input type="text" name="first" autocomplete="given-name" required></label>
+                <label>Last Name <span class="req">(required)</span>
+                  <input type="text" name="last" autocomplete="family-name" required></label>
+              </div>
+            </fieldset>
+            <label>Email <span class="req">(required)</span>
+              <input type="email" name="email" autocomplete="email" required></label>
+            <label>Message <span class="req">(required)</span>
+              <textarea name="message" rows="4" required></textarea></label>
+            <button type="submit">Send</button>
+            <p class="form-note" hidden>Your email app should now open with your message ready to send. If it doesn’t, write to <a href="mailto:thegardensatzion@gmail.com">thegardensatzion@gmail.com</a>.</p>
+          </form>
+        </div>
+        <figure class="contact-photo"><img src="images/contact.jpg" alt="Striped caterpillar climbing a plant stem" width="1500" height="2000" loading="lazy"></figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-title">The Gardens at Zion</p>
+      <p class="footer-email"><a href="mailto:thegardensatzion@gmail.com">thegardensatzion@gmail.com</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

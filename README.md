@@ -1,42 +1,30 @@
-# TheGardensatZion
-Website for The Gardens at Zion
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Gardens at Zion | South Central Texas Horticulture</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+# The Gardens at Zion
 
-    <header>
-        <div class="container">
-            <h1>The Gardens at Zion</h1>
-            <p class="tagline">Research-Based, Traditional Horticulture in South Central Texas</p>
-            <nav>
-                <a href="index.html" class="active">Home</a>
-                <a href="chapel.html">The Chapel Gardens</a>
-                <a href="school.html">The Gardening School</a>
-                <a href="https://your-podcast-link-here.com" target="_blank">Podcast</a>
-            </nav>
-        </div>
-    </header>
+Website for The Gardens at Zion — research-based horticulture and community stewardship in Bexar County, Texas.
 
-    <main class="container">
-        <section class="hero">
-            <h2>Turning Emptiness Into Beauty</h2>
-            <p class="lead">The Gardens at Zion is an idea, a concept—turning emptiness into beauty by utilizing the best gardening practices of South Central Texas.</p>
-            <hr class="divider">
-            <p>Led by Head Garden Steward Bill Swantner, this site serves as a living laboratory for science-backed, traditional horticultural methods, connecting our region's rich pioneer history with practical, modern land stewardship.</p>
-        </section>
-    </main>
+This is a plain static site (HTML, CSS and a little JavaScript, no build step), copied over from the original Squarespace site. It is served by GitHub Pages from the `main` branch.
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 The Gardens at Zion. All rights reserved.</p>
-        </div>
-    </footer>
+## Pages
 
-</body>
-</html>
+| File | Page |
+| --- | --- |
+| `index.html` | Landing page |
+| `home.html` | Home — What are The Gardens |
+| `the-gardens.html` | The Gardens at the Historic Chapel |
+| `the-gardening-school.html` | The Gardening School |
+| `podcast.html` | Podcast |
+| `resources.html` | Resources |
+| `about.html` | Bio — Bill Swantner |
+| `contact.html` | Contact |
+
+`style.css` holds all styling, `script.js` runs the mobile menu and the contact forms, and photos live in `images/`.
+
+## Editing
+
+Open any `.html` file and change the text between the tags. The header, menu and footer are repeated in every page, so a change to the menu has to be made in all eight files.
+
+To preview locally, open `index.html` in a browser.
+
+## Contact forms
+
+GitHub Pages cannot receive form submissions, so the forms on the Bio and Contact pages open the visitor's email app with a message addressed to thegardensatzion@gmail.com.

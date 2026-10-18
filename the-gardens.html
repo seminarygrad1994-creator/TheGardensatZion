@@ -214,7 +214,7 @@
   </div>
 
   <script src="script.js"></script>
-  <script>
+ <script>
     const gardenData = {
       suzie: {
         title: "Suzie's Garden (The Gazebo Area)",
@@ -243,14 +243,22 @@
     function openModal(key) {
       const item = gardenData[key];
       if (!item) return;
-      document.getElementById('modal-body').innerHTML = `
-        <h3 style="margin-top:0; color:#0f172a;">${item.title}</h3>
-        <p>${item.desc}</p>
-        <h4 style="margin-bottom:0.5rem; color:#d97706;">Plant Palette:</h4>
-        <ul>${item.palette.map(p => `<li>${p}</li>`).join('')}</ul>
-        <h4 style="margin-bottom:0.5rem; color:#d97706;">Soil & Care Protocol:</h4>
-        <p><strong>${item.protocol}</strong></p>
-      `;
+
+      if (key === 'fountain') {
+        document.getElementById('modal-body').innerHTML = `
+          <h3 style="margin-top:0; color:#0f172a; font-family:Georgia, serif; font-size:1.5rem;">${item.title}</h3>
+          <div style="color:#334155;">${item.desc}</div>
+        `;
+      } else {
+        document.getElementById('modal-body').innerHTML = `
+          <h3 style="margin-top:0; color:#0f172a;">${item.title}</h3>
+          <p>${item.desc}</p>
+          <h4 style="margin-bottom:0.5rem; color:#d97706;">Plant Palette:</h4>
+          <ul>${item.palette ? item.palette.map(p => `<li>${p}</li>`).join('') : ''}</ul>
+          <h4 style="margin-bottom:0.5rem; color:#d97706;">Soil & Care Protocol:</h4>
+          <p><strong>${item.protocol || ''}</strong></p>
+        `;
+      }
       document.getElementById('modal-overlay').classList.remove('hidden');
     }
 

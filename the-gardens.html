@@ -1,356 +1,196 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-slate-950 text-slate-100">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Gardens at Zion</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        emerald: {
-                            850: '#064e3b',
-                            950: '#022c22',
-                        },
-                        amber: {
-                            450: '#f59e0b',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <style>
-        .font-serif-title { font-family: 'Playfair Display', Georgia, serif; }
-        .glass-card {
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .glass-modal {
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(20px);
-        }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
-        ::-webkit-scrollbar-thumb { background: rgba(52, 211, 153, 0.3); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(52, 211, 153, 0.6); }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Gardens - The Gardens at Zion</title>
+  <meta name="description" content="Explore the interactive garden map and botanical zones at The Gardens at Zion.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Custom layout for the interactive map and garden cards */
+    .gardens-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .garden-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .garden-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    .garden-card.featured {
+      border: 2px solid #d97706;
+      background: #fffbeb;
+    }
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 1000;
+    }
+    .modal-overlay.hidden { display: none; }
+    .modal-box {
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 16px;
+      max-width: 600px;
+      width: 100%;
+      position: relative;
+      color: #1e293b;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      border: none;
+      background: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+  </style>
 </head>
-<body class="h-full flex flex-col font-sans antialiased bg-slate-950 text-slate-100 overflow-x-hidden">
+<body>
+  <a class="skip-link" href="#page">Skip to Content</a>
 
-    <!-- HEADER / NAVIGATION -->
-    <header class="sticky top-0 z-40 w-full glass-card border-b border-emerald-500/20 shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <!-- Logo & Title -->
-                <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('gardens')">
-                    <div class="w-10 h-10 rounded-full bg-emerald-600/30 border border-emerald-400/40 flex items-center justify-center text-emerald-400 shadow-inner">
-                        <i class="fa-solid fa-leaf text-xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="font-serif-title text-xl sm:text-2xl font-bold tracking-wide text-emerald-100">THE GARDENS AT ZION</h1>
-                        <p class="text-xs text-emerald-400/80 font-medium tracking-widest uppercase">Sanctuary & Botanic Learning</p>
-                    </div>
-                </div>
-
-                <!-- Desktop Navigation Tabs -->
-                <nav class="hidden md:flex space-x-1 lg:space-x-2">
-                    <button onclick="switchTab('home')" id="tab-btn-home" class="nav-tab px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 text-slate-300 hover:text-white hover:bg-slate-800/60">
-                        <i class="fa-solid fa-house mr-2 text-xs"></i>Home
-                    </button>
-                    <button onclick="switchTab('gardens')" id="tab-btn-gardens" class="nav-tab px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 text-emerald-400 bg-emerald-950/80 border border-emerald-500/30 shadow-sm">
-                        <i class="fa-solid fa-tree mr-2 text-xs"></i>The Gardens
-                    </button>
-                    <button onclick="switchTab('school')" id="tab-btn-school" class="nav-tab px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 text-slate-300 hover:text-white hover:bg-slate-800/60">
-                        <i class="fa-solid fa-graduation-cap mr-2 text-xs"></i>Gardening School
-                    </button>
-                    <button onclick="switchTab('contact')" id="tab-btn-contact" class="nav-tab px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 text-slate-300 hover:text-white hover:bg-slate-800/60">
-                        <i class="fa-solid fa-envelope mr-2 text-xs"></i>Contact
-                    </button>
-                </nav>
-
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none">
-                        <i class="fa-solid fa-bars text-xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Navigation Menu -->
-        <div id="mobile-menu" class="hidden md:hidden glass-card border-t border-slate-800 px-4 pt-2 pb-4 space-y-2">
-            <button onclick="switchTab('home')" class="w-full text-left px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800"><i class="fa-solid fa-house mr-3 text-emerald-400"></i>Home</button>
-            <button onclick="switchTab('gardens')" class="w-full text-left px-3 py-2 rounded-lg text-base font-medium text-emerald-400 bg-emerald-950/60"><i class="fa-solid fa-tree mr-3 text-emerald-400"></i>The Gardens</button>
-            <button onclick="switchTab('school')" class="w-full text-left px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800"><i class="fa-solid fa-graduation-cap mr-3 text-emerald-400"></i>Gardening School</button>
-            <button onclick="switchTab('contact')" class="w-full text-left px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:bg-slate-800"><i class="fa-solid fa-envelope mr-3 text-emerald-400"></i>Contact</button>
-        </div>
-    </header>
-
-    <!-- MAIN CONTENT AREA -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-
-        <!-- ================= TAB 1: HOME ================= -->
-        <section id="tab-content-home" class="tab-page hidden space-y-12">
-            <div class="relative rounded-3xl overflow-hidden glass-card border border-emerald-500/20 p-8 sm:p-12 lg:p-16 text-center">
-                <div class="max-w-3xl mx-auto space-y-6">
-                    <span class="px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Welcome to Zion</span>
-                    <h2 class="text-3xl sm:text-5xl font-serif-title font-bold text-white tracking-tight">A Sanctuary of Botanical Inspiration</h2>
-                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
-                        Explore six curated botanical environments, learn organic horticulture protocols, and experience tranquility designed around natural water systems and native Texas-adapted flora.
-                    </p>
-                    <div class="pt-4 flex flex-wrap justify-center gap-4">
-                        <button onclick="switchTab('gardens')" class="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition shadow-lg shadow-emerald-900/40 flex items-center gap-2">
-                            <i class="fa-solid fa-map-location-dot"></i> Explore Interactive Gardens
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= TAB 2: THE GARDENS ================= -->
-        <section id="tab-content-gardens" class="tab-page space-y-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-800 pb-6">
-                <div>
-                    <span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">Botanical Masterplan</span>
-                    <h2 class="text-3xl sm:text-4xl font-serif-title font-bold text-white mt-1">Interactive Garden Directory</h2>
-                    <p class="text-slate-400 text-sm sm:text-base mt-2 max-w-2xl">
-                        Click on any garden image or zone card below to open full botanical specifications, plant palettes, and soil management protocols.
-                    </p>
-                </div>
-                <div class="flex items-center gap-2 bg-slate-900 p-1.5 rounded-xl border border-slate-800">
-                    <button onclick="filterGardens('all')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 text-white">All Zones</button>
-                    <button onclick="filterGardens('shade')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white">Shade</button>
-                    <button onclick="filterGardens('sun')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white">Full Sun</button>
-                </div>
-            </div>
-
-            <!-- GARDEN CARDS GRID -->
-            <div id="garden-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                <!-- 1. Fountain Gardens -->
-                <div data-sun="sun" class="garden-card glass-card rounded-2xl border border-slate-800 hover:border-sky-500/50 transition cursor-pointer overflow-hidden" onclick="openGardenModal('fountain')">
-                    <div class="p-6">
-                        <div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center mb-4"><i class="fa-solid fa-water"></i></div>
-                        <h3 class="text-xl font-serif-title font-bold text-white">The Fountain Gardens</h3>
-                        <p class="text-xs text-slate-400 mt-2">Aquatic features, stone basins, and cascading water loving plants.</p>
-                    </div>
-                </div>
-
-                <!-- 2. Meadow Gardens -->
-                <div data-sun="sun" class="garden-card glass-card rounded-2xl border border-slate-800 hover:border-emerald-500/50 transition cursor-pointer overflow-hidden" onclick="openGardenModal('meadow')">
-                    <div class="p-6">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-4"><i class="fa-solid fa-wheat-awn"></i></div>
-                        <h3 class="text-xl font-serif-title font-bold text-white">The Meadow Gardens</h3>
-                        <p class="text-xs text-slate-400 mt-2">Native grasses, drought-tolerant perennials, and pollinator havens.</p>
-                    </div>
-                </div>
-
-                <!-- 3. Labyrinth Gardens -->
-                <div data-sun="sun" class="garden-card glass-card rounded-2xl border border-slate-800 hover:border-emerald-500/50 transition cursor-pointer overflow-hidden" onclick="openGardenModal('labyrinth')">
-                    <div class="p-6">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-4"><i class="fa-solid fa-draw-polygon"></i></div>
-                        <h3 class="text-xl font-serif-title font-bold text-white">The Labyrinth Gardens</h3>
-                        <p class="text-xs text-slate-400 mt-2">A geometric meditation walking path bordered by aromatic herbs.</p>
-                    </div>
-                </div>
-
-                <!-- 4. Chapel Gardens -->
-                <div data-sun="shade" class="garden-card glass-card rounded-2xl border border-slate-800 hover:border-purple-500/50 transition cursor-pointer overflow-hidden" onclick="openGardenModal('chapel')">
-                    <div class="p-6">
-                        <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center mb-4"><i class="fa-solid fa-church"></i></div>
-                        <h3 class="text-xl font-serif-title font-bold text-white">The Chapel Gardens</h3>
-                        <p class="text-xs text-slate-400 mt-2">Serene white floral landscape designed for peaceful contemplation.</p>
-                    </div>
-                </div>
-
-                <!-- 5. Gazebo Gardens / Suzie's Garden -->
-                <div data-sun="shade" class="garden-card glass-card rounded-2xl border-2 border-amber-500/70 hover:border-amber-400 transition cursor-pointer overflow-hidden bg-amber-950/20" onclick="openGardenModal('suzie')">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center"><i class="fa-solid fa-om"></i></div>
-                            <span class="text-[10px] bg-amber-500 text-slate-950 px-2 py-0.5 rounded font-bold">Featured</span>
-                        </div>
-                        <h3 class="text-xl font-serif-title font-bold text-amber-100">The Gazebo / Suzie's Garden</h3>
-                        <p class="text-xs text-slate-300 mt-2">Architectural shade garden featuring Black Scallop Ajuga ribbon, Foxtail Ferns, and Mahonia.</p>
-                    </div>
-                </div>
-
-                <!-- 6. Children's Gardens & Gardening School -->
-                <div data-sun="sun" class="garden-card glass-card rounded-2xl border border-slate-800 hover:border-teal-500/50 transition cursor-pointer overflow-hidden" onclick="openGardenModal('children')">
-                    <div class="p-6">
-                        <div class="w-10 h-10 rounded-xl bg-teal-500/20 text-teal-300 flex items-center justify-center mb-4"><i class="fa-solid fa-graduation-cap"></i></div>
-                        <h3 class="text-xl font-serif-title font-bold text-white">The Gardening School & Children's Garden</h3>
-                        <p class="text-xs text-slate-400 mt-2">Interactive raised beds, youth workshops, and research demonstration plots.</p>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- ================= TAB 3: GARDENING SCHOOL ================= -->
-        <section id="tab-content-school" class="tab-page hidden space-y-6">
-            <div class="glass-card p-8 rounded-3xl border border-slate-800">
-                <h2 class="text-3xl font-serif-title font-bold text-white">The Gardening School at The Gardens at Zion</h2>
-                <p class="text-slate-300 mt-4 leading-relaxed">Providing hands-on horticultural education, research-backed soil building techniques, and seasonal propagation workshops for South Central Texas gardeners.</p>
-            </div>
-        </section>
-
-        <!-- ================= TAB 4: CONTACT ================= -->
-        <section id="tab-content-contact" class="tab-page hidden space-y-6">
-            <div class="glass-card p-8 rounded-3xl border border-slate-800">
-                <h2 class="text-3xl font-serif-title font-bold text-white">Visit & Connect</h2>
-                <p class="text-slate-300 mt-4">For tours, volunteer steward opportunities, or workshop registration, contact The Gardens at Zion stewardship office.</p>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- MODAL OVERLAY FOR GARDEN DETAILS -->
-    <div id="garden-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-        <div class="glass-modal max-w-2xl w-full rounded-3xl border border-slate-700 p-6 sm:p-8 relative shadow-2xl">
-            <button onclick="closeGardenModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div id="modal-content"></div>
-        </div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="site-title" href="index.html">The Gardens at Zion</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+          <a href="index.html">Home</a>
+          <a href="the-gardens.html" class="active">The Gardens</a>
+          <a href="the-gardening-school.html">The Gardening School</a>
+          <a href="podcast.html">Podcast</a>
+          <a href="resources.html">Resources</a>
+          <a href="about.html">Bio</a>
+          <a href="contact.html">Contact</a>
+      </nav>
     </div>
+  </header>
 
-    <!-- SCRIPT TAG: ALL JAVASCRIPT LOGIC MUST STAY INSIDE HERE -->
-    <script>
-        // Tab Switching Logic
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-page').forEach(page => page.classList.add('hidden'));
-            const target = document.getElementById(`tab-content-${tabId}`);
-            if (target) target.classList.remove('hidden');
+  <main id="page">
+    <section class="section">
+      <div class="container">
+        <h2>Interactive Garden Directory</h2>
+        <p>Select any garden zone below to view plant palettes, microclimates, and soil management protocols.</p>
 
-            // Update tab button highlights
-            document.querySelectorAll('.nav-tab').forEach(btn => {
-                btn.classList.remove('text-emerald-400', 'bg-emerald-950/80', 'border', 'border-emerald-500/30');
-                btn.classList.add('text-slate-300');
-            });
-            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
-            if (activeBtn) {
-                activeBtn.classList.add('text-emerald-400', 'bg-emerald-950/80', 'border', 'border-emerald-500/30');
-                activeBtn.classList.remove('text-slate-300');
-            }
-            
-            // Close mobile menu on select
-            document.getElementById('mobile-menu').classList.add('hidden');
-        }
+        <!-- GARDENS GRID -->
+        <div class="gardens-grid">
 
-        // Mobile Menu Toggle
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
+          <!-- 1. Fountain Gardens -->
+          <div class="garden-card" onclick="openModal('fountain')">
+            <i class="fa-solid fa-water text-2xl text-blue-600 mb-2"></i>
+            <h3>The Fountain Gardens</h3>
+            <p>Aquatic features, stone basins, and cascading perennials.</p>
+          </div>
 
-        // Filter Cards by Sunlight
-        function filterGardens(category) {
-            const cards = document.querySelectorAll('.garden-card');
-            cards.forEach(card => {
-                if (category === 'all' || card.getAttribute('data-sun') === category) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
+          <!-- 2. Meadow Gardens -->
+          <div class="garden-card" onclick="openModal('meadow')">
+            <i class="fa-solid fa-wheat-awn text-2xl text-emerald-600 mb-2"></i>
+            <h3>The Meadow Gardens</h3>
+            <p>Native grasses, drought-tolerant flora, and pollinator hubs.</p>
+          </div>
 
-        // Garden Data for Modals
-        const gardenDetails = {
-            suzie: {
-                title: "Suzie's Garden (The Gazebo Area)",
-                type: "High-Contrast Shade Garden",
-                palette: ["'Black Scallop' Ajuga (Double-edged border)", "Foxtail Ferns", "'Funky Flow' Mahonia", "Cast Iron Plants", "Liriope"],
-                protocol: "Medina 3-in-1 Master Drench (Soil Activator, Hasta Gro, Liquid Seaweed/Humic Acid) + 1\" Compost & 2\" Mulch.",
-                desc: "Designed to mitigate builder soil compaction through liquid organic drenches while providing architectural contrast against concrete walkways."
-            },
-            fountain: {
-                title: "The Fountain Gardens",
-                type: "Full Sun Aquatic & Perennial Zone",
-                palette: ["Water Lilies", "Egyptian Papyrus", "Louisiana Iris"],
-                protocol: "Balanced organic aquatic feeding and regular water quality circulation.",
-                desc: "Symmetrical water features serving as a central focal sanctuary."
-            },
-            meadow: {
-                title: "The Meadow Gardens",
-                type: "Native Prairie & Pollinator Zone",
-                palette: ["Purple Coneflower", "Mexican Feathergrass", "Autumn Sage"],
-                protocol: "Minimal low-water drip irrigation once established.",
-                desc: "Sweeping native grasses providing habitat for local pollinators."
-            },
-            labyrinth: {
-                title: "The Labyrinth Gardens",
-                type: "Meditation Walk",
-                palette: ["English Lavender", "Wintergreen Boxwood", "Creeping Thyme"],
-                protocol: "Well-drained soil regimen with light organic top-dressing.",
-                desc: "A geometric path designed for quiet reflection and sensory rest."
-            },
-            chapel: {
-                title: "The Chapel Gardens",
-                type: "Partial Shade Reflection Bed",
-                palette: ["White Hydrangea", "Gardenia", "Japanese Maple"],
-                protocol: "Acidic soil top-dressing and consistent soil moisture maintenance.",
-                desc: "Pure white blooms and evergreen foliage creating a calm backdrop."
-            },
-            children: {
-                title: "The Gardening School & Children's Garden",
-                type: "Interactive Educational Plots",
-                palette: ["Seasonal Vegetables", "Heritage Tomatoes", "Pollinator Annuals"],
-                protocol: "Enriched organic compost beds with student liquid drench trials.",
-                desc: "Hands-on learning beds for research, seed propagation, and youth masterclasses."
-            }
-        };
+          <!-- 3. Labyrinth Gardens -->
+          <div class="garden-card" onclick="openModal('labyrinth')">
+            <i class="fa-solid fa-draw-polygon text-2xl text-emerald-600 mb-2"></i>
+            <h3>The Labyrinth Gardens</h3>
+            <p>Geometric walking path surrounded by fragrant herbs.</p>
+          </div>
 
-        // Modal Open Handler
-        function openGardenModal(zoneKey) {
-            const data = gardenDetails[zoneKey];
-            if (!data) return;
+          <!-- 4. Chapel Gardens -->
+          <div class="garden-card" onclick="openModal('chapel')">
+            <i class="fa-solid fa-church text-2xl text-purple-600 mb-2"></i>
+            <h3>The Chapel Gardens</h3>
+            <p>Serene reflection bed with white floral displays.</p>
+          </div>
 
-            const modal = document.getElementById('garden-modal');
-            const content = document.getElementById('modal-content');
+          <!-- 5. Gazebo / Suzie's Garden -->
+          <div class="garden-card featured" onclick="openModal('suzie')">
+            <i class="fa-solid fa-om text-2xl text-amber-600 mb-2"></i>
+            <h3>Suzie's Garden (The Gazebo)</h3>
+            <p>Shade garden with 'Black Scallop' Ajuga, Foxtail Ferns, Mahonia, Cast Iron Plants, and Liriope.</p>
+          </div>
 
-            content.innerHTML = `
-                <span class="text-xs font-semibold text-emerald-400 uppercase tracking-widest">${data.type}</span>
-                <h3 class="text-2xl font-serif-title font-bold text-white mt-1 mb-3">${data.title}</h3>
-                <p class="text-slate-300 text-sm leading-relaxed mb-4">${data.desc}</p>
-                
-                <div class="space-y-3 border-t border-slate-800 pt-4">
-                    <div>
-                        <h4 class="text-xs font-bold text-emerald-300 uppercase">Plant Palette:</h4>
-                        <ul class="list-disc list-inside text-xs text-slate-300 mt-1 space-y-1">
-                            ${data.palette.map(item => `<li>${item}</li>`).join('')}
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-xs font-bold text-amber-400 uppercase">Care & Soil Protocol:</h4>
-                        <p class="text-xs text-slate-300 mt-1">${data.protocol}</p>
-                    </div>
-                </div>
-            `;
+          <!-- 6. Children's Gardens -->
+          <div class="garden-card" onclick="openModal('children')">
+            <i class="fa-solid fa-graduation-cap text-2xl text-teal-600 mb-2"></i>
+            <h3>The Gardening School & Children's Garden</h3>
+            <p>Educational raised beds and soil research plots.</p>
+          </div>
 
-            modal.classList.remove('hidden');
-        }
+        </div>
+      </div>
+    </section>
+  </main>
 
-        // Modal Close Handler
-        function closeGardenModal() {
-            document.getElementById('garden-modal').classList.add('hidden');
-        }
-    </script>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-title">The Gardens at Zion</p>
+      <p class="footer-email"><a href="mailto:thegardensatzion@gmail.com">thegardensatzion@gmail.com</a></p>
+    </div>
+  </footer>
+
+  <!-- DETAIL MODAL POPUP -->
+  <div id="modal-overlay" class="modal-overlay hidden" onclick="closeModal()">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    const data = {
+      suzie: {
+        title: "Suzie's Garden (The Gazebo Area)",
+        desc: "A precision shade bed designed to thrive in heavy builder soil through structured organic soil building.",
+        palette: ["'Black Scallop' Ajuga (Double perimeter ribbon)", "Foxtail Ferns", "'Funky Flow' Mahonia", "Cast Iron Plants", "Liriope"],
+        protocol: "Medina 3-in-1 Master Drench (Soil Activator, Hasta Gro, Liquid Seaweed/Humic Acid), 1\" compost layer, 2\" bark mulch."
+      },
+      fountain: { title: "The Fountain Gardens", desc: "Symmetrical water feature garden.", palette: ["Water Lilies", "Egyptian Papyrus", "Louisiana Iris"], protocol: "Aquatic feeding and circulation." },
+      meadow: { title: "The Meadow Gardens", desc: "Full sun native prairie zone.", palette: ["Purple Coneflower", "Mexican Feathergrass", "Salvia"], protocol: "Low-water drip irrigation." },
+      labyrinth: { title: "The Labyrinth Gardens", desc: "Meditation path.", palette: ["English Lavender", "Boxwood", "Creeping Thyme"], protocol: "Well-drained soil maintenance." },
+      chapel: { title: "The Chapel Gardens", desc: "Shade reflection garden.", palette: ["White Hydrangea", "Gardenia", "Japanese Maple"], protocol: "Organic acidifying soil treatment." },
+      children: { title: "The Gardening School Beds", desc: "Interactive teaching plots.", palette: ["Seasonal Produce", "Heritage Tomatoes"], protocol: "Enriched compost and organic liquid drenches." }
+    };
+
+    function openModal(key) {
+      const item = data[key];
+      if (!item) return;
+      document.getElementById('modal-body').innerHTML = `
+        <h3 style="margin-top:0; color:#0f172a;">${item.title}</h3>
+        <p>${item.desc}</p>
+        <h4 style="margin-bottom:0.5rem;">Plant Palette:</h4>
+        <ul>${item.palette.map(p => `<li>${p}</li>`).join('')}</ul>
+        <h4 style="margin-bottom:0.5rem;">Soil & Care Protocol:</h4>
+        <p><strong>${item.protocol}</strong></p>
+      `;
+      document.getElementById('modal-overlay').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.add('hidden');
+    }
+  </script>
 </body>
 </html>

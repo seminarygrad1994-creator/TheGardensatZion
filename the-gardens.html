@@ -12,12 +12,41 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Custom layout for the interactive map and garden cards */
+    /* Interactive Map Styling */
+    .map-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto 2.5rem auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
+      border: 1px solid #cbd5e1;
+    }
+    .map-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    /* Invisible Clickable Hotspots overlaying Slide1.jpeg */
+    .hotspot {
+      position: absolute;
+      cursor: pointer;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .hotspot:hover {
+      background: rgba(217, 119, 6, 0.25);
+      border-color: #d97706;
+    }
+
+    /* Grid Layout for Garden Cards Below Map */
     .gardens-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
-      margin-top: 2rem;
+      margin-top: 1.5rem;
     }
     .garden-card {
       background: #ffffff;
@@ -35,6 +64,8 @@
       border: 2px solid #d97706;
       background: #fffbeb;
     }
+
+    /* Modal Popup Styling */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -54,6 +85,7 @@
       width: 100%;
       position: relative;
       color: #1e293b;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
     }
     .modal-close {
       position: absolute;
@@ -61,14 +93,17 @@
       right: 1rem;
       border: none;
       background: none;
-      font-size: 1.5rem;
+      font-size: 1.75rem;
       cursor: pointer;
+      color: #64748b;
     }
+    .modal-close:hover { color: #0f172a; }
   </style>
 </head>
 <body>
   <a class="skip-link" href="#page">Skip to Content</a>
 
+  <!-- SITE HEADER -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="site-title" href="index.html">The Gardens at Zion</a>
@@ -87,51 +122,71 @@
     </div>
   </header>
 
+  <!-- MAIN CONTENT -->
   <main id="page">
     <section class="section">
       <div class="container">
         <h2>Interactive Garden Directory</h2>
-        <p>Select any garden zone below to view plant palettes, microclimates, and soil management protocols.</p>
+        <p>Click on any garden area on the image map or select a zone card below to explore plant palettes, microclimates, and soil protocols.</p>
 
-        <!-- GARDENS GRID -->
+        <!-- INTERACTIVE MAP CONTAINER WITH SLIDE1.JPEG -->
+        <div class="map-wrapper">
+          <!-- Adjust src="images/Slide1.jpeg" if your image is in a different subfolder -->
+          <img src="images/Slide1.jpeg" alt="The Gardens at Zion Map" class="map-image" onerror="this.src='Slide1.jpeg'">
+
+          <!-- CLICKABLE HOTSPOTS OVERLAYING SLIDE PHOTO LOCATIONS -->
+          <!-- 1. Fountain Gardens (Top-Left) -->
+          <div class="hotspot" style="top: 2%; left: 2%; width: 16%; height: 35%;" onclick="openModal('fountain')" title="The Fountain Gardens"></div>
+          
+          <!-- 2. Meadow Gardens (Top-Center) -->
+          <div class="hotspot" style="top: 5%; left: 37%; width: 22%; height: 32%;" onclick="openModal('meadow')" title="The Meadow Gardens"></div>
+
+          <!-- 3. Labyrinth Gardens (Top-Right) -->
+          <div class="hotspot" style="top: 5%; left: 72%; width: 26%; height: 35%;" onclick="openModal('labyrinth')" title="The Labyrinth Gardens"></div>
+
+          <!-- 4. Chapel Gardens (Bottom-Left) -->
+          <div class="hotspot" style="top: 65%; left: 3%; width: 22%; height: 32%;" onclick="openModal('chapel')" title="The Chapel Gardens"></div>
+
+          <!-- 5. Gazebo / Suzie's Garden (Bottom-Center) -->
+          <div class="hotspot" style="top: 65%; left: 42%; width: 20%; height: 32%;" onclick="openModal('suzie')" title="Suzie's Garden (Gazebo)"></div>
+
+          <!-- 6. Children's Gardens / Gardening School (Bottom-Right) -->
+          <div class="hotspot" style="top: 65%; left: 80%; width: 18%; height: 32%;" onclick="openModal('children')" title="The Gardening School & Children's Gardens"></div>
+        </div>
+
+        <!-- GARDENS CARD GRID -->
         <div class="gardens-grid">
 
-          <!-- 1. Fountain Gardens -->
           <div class="garden-card" onclick="openModal('fountain')">
             <i class="fa-solid fa-water text-2xl text-blue-600 mb-2"></i>
             <h3>The Fountain Gardens</h3>
             <p>Aquatic features, stone basins, and cascading perennials.</p>
           </div>
 
-          <!-- 2. Meadow Gardens -->
           <div class="garden-card" onclick="openModal('meadow')">
             <i class="fa-solid fa-wheat-awn text-2xl text-emerald-600 mb-2"></i>
             <h3>The Meadow Gardens</h3>
             <p>Native grasses, drought-tolerant flora, and pollinator hubs.</p>
           </div>
 
-          <!-- 3. Labyrinth Gardens -->
           <div class="garden-card" onclick="openModal('labyrinth')">
             <i class="fa-solid fa-draw-polygon text-2xl text-emerald-600 mb-2"></i>
             <h3>The Labyrinth Gardens</h3>
             <p>Geometric walking path surrounded by fragrant herbs.</p>
           </div>
 
-          <!-- 4. Chapel Gardens -->
           <div class="garden-card" onclick="openModal('chapel')">
             <i class="fa-solid fa-church text-2xl text-purple-600 mb-2"></i>
             <h3>The Chapel Gardens</h3>
             <p>Serene reflection bed with white floral displays.</p>
           </div>
 
-          <!-- 5. Gazebo / Suzie's Garden -->
           <div class="garden-card featured" onclick="openModal('suzie')">
             <i class="fa-solid fa-om text-2xl text-amber-600 mb-2"></i>
             <h3>Suzie's Garden (The Gazebo)</h3>
             <p>Shade garden with 'Black Scallop' Ajuga, Foxtail Ferns, Mahonia, Cast Iron Plants, and Liriope.</p>
           </div>
 
-          <!-- 6. Children's Gardens -->
           <div class="garden-card" onclick="openModal('children')">
             <i class="fa-solid fa-graduation-cap text-2xl text-teal-600 mb-2"></i>
             <h3>The Gardening School & Children's Garden</h3>
@@ -143,6 +198,7 @@
     </section>
   </main>
 
+  <!-- SITE FOOTER -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <p class="footer-title">The Gardens at Zion</p>
@@ -160,7 +216,7 @@
 
   <script src="script.js"></script>
   <script>
-    const data = {
+    const gardenData = {
       suzie: {
         title: "Suzie's Garden (The Gazebo Area)",
         desc: "A precision shade bed designed to thrive in heavy builder soil through structured organic soil building.",
@@ -175,14 +231,14 @@
     };
 
     function openModal(key) {
-      const item = data[key];
+      const item = gardenData[key];
       if (!item) return;
       document.getElementById('modal-body').innerHTML = `
         <h3 style="margin-top:0; color:#0f172a;">${item.title}</h3>
         <p>${item.desc}</p>
-        <h4 style="margin-bottom:0.5rem;">Plant Palette:</h4>
+        <h4 style="margin-bottom:0.5rem; color:#d97706;">Plant Palette:</h4>
         <ul>${item.palette.map(p => `<li>${p}</li>`).join('')}</ul>
-        <h4 style="margin-bottom:0.5rem;">Soil & Care Protocol:</h4>
+        <h4 style="margin-bottom:0.5rem; color:#d97706;">Soil & Care Protocol:</h4>
         <p><strong>${item.protocol}</strong></p>
       `;
       document.getElementById('modal-overlay').classList.remove('hidden');

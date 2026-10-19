@@ -386,3 +386,49 @@ h2.center + .prose { margin-top: 11px; }
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
   display: inline-block;
+/* ==========================================
+   FORCE MODAL SCROLL & BUTTON VISIBILITY
+   ========================================== */
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+
+#modal-overlay.hidden {
+  display: none !important;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 650px;
+  max-height: 80vh !important; /* Forces card to fit inside 80% of screen height */
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+}
+
+.modal-body {
+  padding: 2rem;
+  overflow-y: auto !important; /* Enables internal scroll bar for long text */
+  -webkit-overflow-scrolling: touch;
+  flex: 1 1 auto;
+}
+
+.modal-footer {
+  padding: 1rem 2rem 1.5rem 2rem;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  text-align: right;
+}

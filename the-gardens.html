@@ -36,29 +36,56 @@
       
       <!-- The Fountain Gardens -->
       <!-- Master Site Map Display with Interactive Click Zones -->
-      <div class="bg-white p-4 rounded-xl shadow-md border border-slate-200 mb-10 max-w-4xl mx-auto overflow-hidden">
+     <div class="bg-white p-4 rounded-xl shadow-md border border-slate-200 mb-10 max-w-4xl mx-auto overflow-hidden">
         <h3 class="font-serif font-bold text-lg text-slate-800 mb-3 text-center">Master Site Layout</h3>
-        <div class="w-full bg-slate-100 rounded-lg overflow-hidden flex items-center justify-center relative">
-          <img src="images/Thisone.jpeg" usemap="#image-map" alt="The Gardens at Zion Master Map" class="w-full h-auto object-contain max-h-[500px]" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'p-8 text-slate-500 italic\'>Master map image loading. Check folder path.</div>';">
+        
+        <!-- Image Container with Absolute Overlay Buttons -->
+        <div class="w-full bg-slate-100 rounded-lg overflow-hidden relative inline-block">
           
-          <!-- Interactive Click Hotspots across the map layout -->
-          <map name="image-map">
-            <!-- Top Left: The Fountain Gardens -->
-            <area target="" alt="The Fountain Gardens" title="The Fountain Gardens" href="javascript:void(0)" coords="0,0,250,250" shape="rect" onclick="openModal('fountain')">
-            <!-- Top Center: The Meadow Gardens -->
-            <area target="" alt="The Meadow Gardens" title="The Meadow Gardens" href="javascript:void(0)" coords="251,0,600,250" shape="rect" onclick="openModal('meadow')">
-            <!-- Top Right: The Labyrinth Gardens -->
-            <area target="" alt="The Labyrinth Gardens" title="The Labyrinth Gardens" href="javascript:void(0)" coords="601,0,1000,250" shape="rect" onclick="openModal('labyrinth')">
-            <!-- Bottom Left: The Chapel Gardens -->
-            <area target="" alt="The Chapel Gardens" title="The Chapel Gardens" href="javascript:void(0)" coords="0,251,300,600" shape="rect" onclick="openModal('chapel')">
-            <!-- Bottom Center: The Gazebo Gardens (Suzie's Garden) -->
-            <area target="" alt="Suzie's Garden" title="Suzie's Garden" href="javascript:void(0)" coords="301,251,650,600" shape="rect" onclick="openModal('suzie')">
-            <!-- Bottom Right: The Children's Gardens -->
-            <area target="" alt="The Gardening School Beds" title="The Gardening School Beds" href="javascript:void(0)" coords="651,251,1000,600" shape="rect" onclick="openModal('children')">
-          </map>
-        </div>
-      </div>
+          <!-- Master Map Image -->
+          <img src="images/Thisone.jpeg" alt="The Gardens at Zion Master Map" class="w-full h-auto object-contain max-h-[500px] block" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'p-8 text-slate-500 italic\'>Master map image loading. Check folder path.</div>';">
 
+          <!-- HOTSPOT 1: The Fountain Gardens (Top-Left Inset Photo) -->
+          <button onclick="openModal('fountain')" 
+                  title="Click to view The Fountain Gardens details"
+                  style="position: absolute; top: 5%; left: 2%; width: 18%; height: 35%; background: rgba(217, 119, 6, 0.15); border: 2px dashed #d97706; border-radius: 8px; cursor: pointer; transition: all 0.2s;"
+                  onmouseover="this.style.background='rgba(217, 119, 6, 0.35)'" 
+                  onmouseout="this.style.background='rgba(217, 119, 6, 0.15)'">
+          </button>
+
+          <!-- HOTSPOT 2: The Meadow Gardens (Top-Center) -->
+          <button onclick="openModal('meadow')" 
+                  title="Click to view The Meadow Gardens details"
+                  style="position: absolute; top: 10%; left: 38%; width: 22%; height: 30%; background: transparent; border: none; cursor: pointer;">
+          </button>
+
+          <!-- HOTSPOT 3: The Labyrinth Gardens (Top-Right) -->
+          <button onclick="openModal('labyrinth')" 
+                  title="Click to view The Labyrinth Gardens details"
+                  style="position: absolute; top: 8%; left: 72%; width: 25%; height: 35%; background: transparent; border: none; cursor: pointer;">
+          </button>
+
+          <!-- HOTSPOT 4: The Chapel Gardens (Bottom-Left) -->
+          <button onclick="openModal('chapel')" 
+                  title="Click to view The Chapel Gardens details"
+                  style="position: absolute; top: 68%; left: 2%; width: 24%; height: 30%; background: transparent; border: none; cursor: pointer;">
+          </button>
+
+          <!-- HOTSPOT 5: Suzie's Gazebo Gardens (Bottom-Center) -->
+          <button onclick="openModal('suzie')" 
+                  title="Click to view Suzie's Garden details"
+                  style="position: absolute; top: 68%; left: 42%; width: 22%; height: 30%; background: transparent; border: none; cursor: pointer;">
+          </button>
+
+          <!-- HOTSPOT 6: The Gardening School Beds (Bottom-Right) -->
+          <button onclick="openModal('children')" 
+                  title="Click to view The Gardening School Beds details"
+                  style="position: absolute; top: 68%; left: 80%; width: 18%; height: 30%; background: transparent; border: none; cursor: pointer;">
+          </button>
+
+        </div>
+        <p class="text-xs text-slate-500 text-center mt-2 italic">Click any framed garden photo on the map to open its plant palette and philosophy.</p>
+      </div>
       <!-- Suzie's Garden -->
       <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-slate-100 flex flex-col justify-between" onclick="openModal('suzie')">
         <div>

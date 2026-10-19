@@ -35,13 +35,28 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       
       <!-- The Fountain Gardens -->
-      <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-slate-100 flex flex-col justify-between" onclick="openModal('fountain')">
-        <div>
-          <i class="fa-solid fa-fountain text-2xl text-amber-600 mb-3"></i>
-          <h3 class="text-xl font-serif font-bold text-slate-900 mb-2">The Fountain Gardens</h3>
-          <p class="text-slate-600 text-sm">Tiered central water fountain framed by sweeping fields of primary color inspired by Giverny.</p>
+      <!-- Master Site Map Display with Interactive Click Zones -->
+      <div class="bg-white p-4 rounded-xl shadow-md border border-slate-200 mb-10 max-w-4xl mx-auto overflow-hidden">
+        <h3 class="font-serif font-bold text-lg text-slate-800 mb-3 text-center">Master Site Layout</h3>
+        <div class="w-full bg-slate-100 rounded-lg overflow-hidden flex items-center justify-center relative">
+          <img src="images/Thisone.jpeg" usemap="#image-map" alt="The Gardens at Zion Master Map" class="w-full h-auto object-contain max-h-[500px]" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'p-8 text-slate-500 italic\'>Master map image loading. Check folder path.</div>';">
+          
+          <!-- Interactive Click Hotspots across the map layout -->
+          <map name="image-map">
+            <!-- Top Left: The Fountain Gardens -->
+            <area target="" alt="The Fountain Gardens" title="The Fountain Gardens" href="javascript:void(0)" coords="0,0,250,250" shape="rect" onclick="openModal('fountain')">
+            <!-- Top Center: The Meadow Gardens -->
+            <area target="" alt="The Meadow Gardens" title="The Meadow Gardens" href="javascript:void(0)" coords="251,0,600,250" shape="rect" onclick="openModal('meadow')">
+            <!-- Top Right: The Labyrinth Gardens -->
+            <area target="" alt="The Labyrinth Gardens" title="The Labyrinth Gardens" href="javascript:void(0)" coords="601,0,1000,250" shape="rect" onclick="openModal('labyrinth')">
+            <!-- Bottom Left: The Chapel Gardens -->
+            <area target="" alt="The Chapel Gardens" title="The Chapel Gardens" href="javascript:void(0)" coords="0,251,300,600" shape="rect" onclick="openModal('chapel')">
+            <!-- Bottom Center: The Gazebo Gardens (Suzie's Garden) -->
+            <area target="" alt="Suzie's Garden" title="Suzie's Garden" href="javascript:void(0)" coords="301,251,650,600" shape="rect" onclick="openModal('suzie')">
+            <!-- Bottom Right: The Children's Gardens -->
+            <area target="" alt="The Gardening School Beds" title="The Gardening School Beds" href="javascript:void(0)" coords="651,251,1000,600" shape="rect" onclick="openModal('children')">
+          </map>
         </div>
-        <span class="text-amber-600 text-sm font-semibold mt-4 inline-flex items-center">Learn More &rarr;</span>
       </div>
 
       <!-- Suzie's Garden -->

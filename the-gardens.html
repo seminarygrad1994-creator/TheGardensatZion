@@ -136,15 +136,15 @@
         <span class="text-amber-600 text-sm font-semibold mt-4 inline-flex items-center">Learn More &rarr;</span>
       </div>
 
-      <!-- The Gardening School Beds -->
-      <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-slate-100 flex flex-col justify-between" onclick="openModal('children')">
+      <!-- The Gardening School Beds (Direct Link to Page) -->
+      <a href="gardening-school.html" class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-slate-100 flex flex-col justify-between block no-underline">
         <div>
           <i class="fa-solid fa-graduation-cap text-2xl text-emerald-600 mb-3"></i>
-          <h3 class="text-xl font-serif font-bold text-slate-900 mb-2">The Gardening School Beds</h3>
-          <p class="text-slate-600 text-sm">Educational raised beds and soil research plots for practical learning.</p>
+          <h3 class="text-xl font-serif font-bold text-slate-900 mb-2">The Gardening School</h3>
+          <p class="text-slate-600 text-sm">Educational raised beds, curriculum programs, and soil research plots for practical learning.</p>
         </div>
-        <span class="text-amber-600 text-sm font-semibold mt-4 inline-flex items-center">Learn More &rarr;</span>
-      </div>
+        <span class="text-amber-600 text-sm font-semibold mt-4 inline-flex items-center">Visit School Page &rarr;</span>
+      </a>
 
     </div>
   </main>
@@ -188,14 +188,20 @@
       meadow: { title: "The Meadow Gardens", desc: "Full sun native prairie zone.", palette: ["Purple Coneflower", "Mexican Feathergrass", "Salvia"], protocol: "Low-water drip irrigation." },
       labyrinth: { title: "The Labyrinth Gardens", desc: "Meditation path.", palette: ["English Lavender", "Boxwood", "Creeping Thyme"], protocol: "Well-drained soil maintenance." },
       chapel: { title: "The Chapel Gardens", desc: "Shade reflection garden.", palette: ["White Hydrangea", "Gardenia", "Japanese Maple"], protocol: "Organic acidifying soil treatment." },
-      children: { title: "The Gardening School Beds", desc: "Educational raised beds and soil research plots for practical learning.", palette: ["Seasonal Produce", "Heritage Tomatoes"], protocol: "Enriched compost and organic liquid drenches." }
+      children: { 
+        title: "The Gardening School Beds", 
+        desc: `<p style="margin-bottom: 1rem; line-height: 1.6;">Educational raised beds and soil research plots for practical learning across all age groups.</p>
+               <a href="gardening-school.html" style="display:inline-block; background-color:#d97706; color:#ffffff; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold; margin-top:0.5rem;">
+                 Visit The Gardening School Page &rarr;
+               </a>` 
+      }
     };
 
     function openModal(key) {
       const item = gardenData[key];
       if (!item) return;
 
-      if (key === 'fountain') {
+      if (key === 'fountain' || key === 'children') {
         document.getElementById('modal-body').innerHTML = `
           <h3 style="margin-top:0; color:#0f172a; font-family:Georgia, serif; font-size:1.5rem; margin-bottom:1rem;">${item.title}</h3>
           <div style="color:#334155;">${item.desc}</div>

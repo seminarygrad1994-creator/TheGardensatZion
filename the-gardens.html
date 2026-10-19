@@ -22,12 +22,102 @@
     </div>
   </header>
 
-  <!-- Main Grid Container -->
+  <!-- Main Grid Container with Garden Cards & Photos -->
   <main class="max-w-6xl mx-auto px-6 flex-grow mb-16 w-full">
     <div class="text-center mb-10">
       <h2 class="text-3xl font-serif font-bold text-slate-900 mb-3">Interactive Garden Directory</h2>
       <p class="text-slate-600 max-w-2xl mx-auto">Explore the distinct garden zones across our site. Click any card below to view planting palettes, design philosophy, and care protocols.</p>
     </div>
+
+    <!-- Garden Cards Grid with Images -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <!-- The Fountain Gardens Card -->
+      <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-slate-100 overflow-hidden flex flex-col justify-between" onclick="openModal('fountain')">
+        <div class="h-48 w-full bg-slate-200 overflow-hidden relative">
+          <img src="images/fountain-gardens.jpg" alt="The Fountain Gardens" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-amber-50 text-amber-600\'><i class=\'fa-solid fa-fountain text-4xl\'></i></div>';">
+        </div>
+        <div class="p-6 flex-grow flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-serif font-bold text-slate-900 mb-2">The Fountain Gardens</h3>
+            <p class="text-slate-600 text-sm">Tiered central water fountain framed by sweeping fields of primary color inspired by Giverny.</p>
+          </div>
+          <span class="text-amber-600 text-sm font-semibold mt-4 inline-flex items-center">Learn More &rarr;</span>
+        </div>
+      </div>
+
+      <!-- Suzie's Garden Card -->
+      <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-slate-100 overflow-hidden flex flex-col justify-between" onclick="openModal('suzie')">
+        <div class="h-48 w-full bg-slate-200 overflow-hidden relative">
+          <img src="images/suzies-garden.jpg" alt="Suzie's Garden" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-emerald-50 text-emerald-600\'><i class=\'fa-solid fa-seedling text-4xl\'></i></div>';">
+        </div>
+        <div class="p-6 flex-grow flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-serif font-bold text-slate-900 mb-2">Suzie's Garden (The Gazebo)</h3>
+            <p class="text-slate-600 text-sm">Precision shade bed featuring Ajuga, Foxtail Ferns, and structured organic soil building.</p>
+          </div>
+          <span class="text-amber-600 text-sm font-semibold mt-4 inline-flex items-center">Learn More &rarr;</span>
+        </div>
+      </div>
+
+      <!-- The Meadow Gardens Card -->
+      <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-slate-100 overflow-hidden flex flex-col justify-between" onclick="openModal('meadow')">
+        <div class="h-48 w-full bg-slate-200 overflow-hidden relative">
+          <img src="images/meadow-gardens.jpg" alt="The Meadow Gardens" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-amber-50 text-amber-600\'><i class=\'fa-solid fa-spa text-4xl\'></i></div>';">
+        </div>
+        <div class="p-6 flex-grow flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-serif font-bold text-slate-900 mb-2">The Meadow Gardens</h3>
+            <p class="text-slate-600 text-sm">Full sun native prairie zone with drought-tolerant flora and pollinator hubs.</p>
+          </div>
+          <span class="text-amber-600 text-sm font-semibold mt-4 inline-flex items-center">Learn More &rarr;</span>
+        </div>
+      </div>
+
+      <!-- The Labyrinth Gardens Card -->
+      <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-slate-100 overflow-hidden flex flex-col justify-between" onclick="openModal('labyrinth')">
+        <div class="h-48 w-full bg-slate-200 overflow-hidden relative">
+          <img src="images/labyrinth-gardens.jpg" alt="The Labyrinth Gardens" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-indigo-50 text-indigo-600\'><i class=\'fa-solid fa-circle-nodes text-4xl\'></i></div>';">
+        </div>
+        <div class="p-6 flex-grow flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-serif font-bold text-slate-900 mb-2">The Labyrinth Gardens</h3>
+            <p class="text-slate-600 text-sm">Geometric walking path surrounded by fragrant herbs and meditative plantings.</p>
+          </div>
+          <span class="text-amber-600 text-sm font-semibold mt-4 inline-flex items-center">Learn More &rarr;</span>
+        </div>
+      </div>
+
+      <!-- The Chapel Gardens Card -->
+      <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-slate-100 overflow-hidden flex flex-col justify-between" onclick="openModal('chapel')">
+        <div class="h-48 w-full bg-slate-200 overflow-hidden relative">
+          <img src="images/chapel-gardens.jpg" alt="The Chapel Gardens" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-slate-100 text-slate-600\'><i class=\'fa-solid fa-church text-4xl\'></i></div>';">
+        </div>
+        <div class="p-6 flex-grow flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-serif font-bold text-slate-900 mb-2">The Chapel Gardens</h3>
+            <p class="text-slate-600 text-sm">Serene reflection bed with white floral displays and acid-loving specimens.</p>
+          </div>
+          <span class="text-amber-600 text-sm font-semibold mt-4 inline-flex items-center">Learn More &rarr;</span>
+        </div>
+      </div>
+
+      <!-- The Gardening School Beds Card -->
+      <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-slate-100 overflow-hidden flex flex-col justify-between" onclick="openModal('children')">
+        <div class="h-48 w-full bg-slate-200 overflow-hidden relative">
+          <img src="images/school-beds.jpg" alt="The Gardening School Beds" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-emerald-50 text-emerald-600\'><i class=\'fa-solid fa-graduation-cap text-4xl\'></i></div>';">
+        </div>
+        <div class="p-6 flex-grow flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-serif font-bold text-slate-900 mb-2">The Gardening School Beds</h3>
+            <p class="text-slate-600 text-sm">Educational raised beds and soil research plots for practical learning.</p>
+          </div>
+          <span class="text-amber-600 text-sm font-semibold mt-4 inline-flex items-center">Learn More &rarr;</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
 
     <!-- Garden Cards Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -363,3 +363,26 @@ h2.center + .prose { margin-top: 11px; }
   .contact-photo { max-width: 340px; }
   .footer-inner { flex-direction: column; }
 }
+/* ==========================================
+   MODAL CONTAINER & BUTTON VISIBILITY FIX
+   ========================================== */
+.modal-content {
+  max-height: 85vh; /* Limits card height to 85% of screen height */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal-body {
+  overflow-y: auto; /* Adds smooth internal scrolling for long text */
+  padding: 1.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Keeps the exploration button fully visible and accessible */
+.modal-body .btn, 
+.modal-body a.btn,
+.modal-footer {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  display: inline-block;

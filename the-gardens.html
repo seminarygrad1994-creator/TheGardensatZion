@@ -3,218 +3,116 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Gardens - The Gardens at Zion</title>
-  <meta name="description" content="Explore the interactive garden map and botanical zones at The Gardens at Zion.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-  <!-- FontAwesome for Icons -->
+  <title>The Gardens at Zion - Directory</title>
+  <!-- Tailwind CSS & FontAwesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* Interactive Map Styling */
-    .map-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 1000px;
-      margin: 0 auto 2.5rem auto;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
-      border: 1px solid #cbd5e1;
-    }
-    .map-image {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    /* Invisible Clickable Hotspots overlaying Slide1.jpeg */
-    .hotspot {
-      position: absolute;
-      cursor: pointer;
-      border: 2px solid transparent;
-      border-radius: 8px;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .hotspot:hover {
-      background: rgba(217, 119, 6, 0.25);
-      border-color: #d97706;
-    }
-
-    /* Grid Layout for Garden Cards Below Map */
-    .gardens-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-    .garden-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 1.5rem;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .garden-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    }
-    .garden-card.featured {
-      border: 2px solid #d97706;
-      background: #fffbeb;
-    }
-
-    /* Modal Popup Styling */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      z-index: 1000;
-    }
-    .modal-overlay.hidden { display: none; }
-    .modal-box {
-      background: #ffffff;
-      padding: 2rem;
-      border-radius: 16px;
-      max-width: 600px;
-      width: 100%;
-      position: relative;
-      color: #1e293b;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
-    }
-    .modal-close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      border: none;
-      background: none;
-      font-size: 1.75rem;
-      cursor: pointer;
-      color: #64748b;
-    }
-    .modal-close:hover { color: #0f172a; }
-  </style>
 </head>
-<body>
-  <a class="skip-link" href="#page">Skip to Content</a>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
 
-  <!-- SITE HEADER -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="site-title" href="index.html">The Gardens at Zion</a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
-        <span></span><span></span>
-      </button>
-      <nav id="site-nav" class="site-nav" aria-label="Main">
-          <a href="index.html">Home</a>
-          <a href="the-gardens.html" class="active">The Gardens</a>
-          <a href="the-gardening-school.html">The Gardening School</a>
-          <a href="podcast.html">Podcast</a>
-          <a href="resources.html">Resources</a>
-          <a href="about.html">Bio</a>
-          <a href="contact.html">Contact</a>
+  <!-- Header / Navigation -->
+  <header class="bg-white shadow-sm py-4 px-6 mb-8">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-serif font-bold text-slate-900">The Gardens at Zion</h1>
+      <nav class="space-x-4">
+        <a href="index.html" class="text-slate-600 hover:text-amber-600 font-medium">Home</a>
+        <a href="the-gardens.html" class="text-amber-600 font-semibold">The Gardens</a>
       </nav>
     </div>
   </header>
 
-  <!-- MAIN CONTENT -->
-  <main id="page">
-    <section class="section">
-      <div class="container">
-        <h2>Interactive Garden Directory</h2>
-        <p>Click on any garden area on the image map or select a zone card below to explore plant palettes, microclimates, and soil protocols.</p>
+  <!-- Main Grid Container -->
+  <main class="max-w-6xl mx-auto px-6 flex-grow mb-16 w-full">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-serif font-bold text-slate-900 mb-3">Interactive Garden Directory</h2>
+      <p class="text-slate-600 max-w-2xl mx-auto">Explore the distinct garden zones across our site. Click any card below to view planting palettes, design philosophy, and care protocols.</p>
+    </div>
 
-        <!-- INTERACTIVE MAP CONTAINER WITH THISONE.JPEG -->
-        <div class="map-wrapper">
-          <<img src="images/Thisone.jpeg" alt="The Gardens at Zion Map" class="map-image">
-
-          <!-- CLICKABLE HOTSPOTS OVERLAYING SLIDE PHOTO LOCATIONS -->
-          <!-- 1. Fountain Gardens (Top-Left) -->
-          <div class="hotspot" style="top: 2%; left: 2%; width: 16%; height: 35%;" onclick="openModal('fountain')" title="The Fountain Gardens"></div>
-          
-          <!-- 2. Meadow Gardens (Top-Center) -->
-          <div class="hotspot" style="top: 5%; left: 37%; width: 22%; height: 32%;" onclick="openModal('meadow')" title="The Meadow Gardens"></div>
-
-          <!-- 3. Labyrinth Gardens (Top-Right) -->
-          <div class="hotspot" style="top: 5%; left: 72%; width: 26%; height: 35%;" onclick="openModal('labyrinth')" title="The Labyrinth Gardens"></div>
-
-          <!-- 4. Chapel Gardens (Bottom-Left) -->
-          <div class="hotspot" style="top: 65%; left: 3%; width: 22%; height: 32%;" onclick="openModal('chapel')" title="The Chapel Gardens"></div>
-
-          <!-- 5. Gazebo / Suzie's Garden (Bottom-Center) -->
-          <div class="hotspot" style="top: 65%; left: 42%; width: 20%; height: 32%;" onclick="openModal('suzie')" title="Suzie's Garden (Gazebo)"></div>
-
-          <!-- 6. Children's Gardens / Gardening School (Bottom-Right) -->
-          <div class="hotspot" style="top: 65%; left: 80%; width: 18%; height: 32%;" onclick="openModal('children')" title="The Gardening School & Children's Gardens"></div>
+    <!-- Garden Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <!-- The Fountain Gardens -->
+      <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-slate-100 flex flex-col justify-between" onclick="openModal('fountain')">
+        <div>
+          <i class="fa-solid fa-fountain text-2xl text-amber-600 mb-3"></i>
+          <h3 class="text-xl font-serif font-bold text-slate-900 mb-2">The Fountain Gardens</h3>
+          <p class="text-slate-600 text-sm">Tiered central water fountain framed by sweeping fields of primary color inspired by Giverny.</p>
         </div>
-
-        <!-- GARDENS CARD GRID -->
-        <div class="gardens-grid">
-
-        <div class="garden-card" onclick="openModal('fountain')">
-  <i class="fa-solid fa-fountain text-2xl text-amber-600 mb-2"></i>
-  <h3>The Fountain Gardens</h3>
-  <p>Tiered central water fountain framed by sweeping fields of primary color.</p>
-</div>
-
-          <div class="garden-card" onclick="openModal('meadow')">
-            <i class="fa-solid fa-wheat-awn text-2xl text-emerald-600 mb-2"></i>
-            <h3>The Meadow Gardens</h3>
-            <p>Native grasses, drought-tolerant flora, and pollinator hubs.</p>
-          </div>
-
-          <div class="garden-card" onclick="openModal('labyrinth')">
-            <i class="fa-solid fa-draw-polygon text-2xl text-emerald-600 mb-2"></i>
-            <h3>The Labyrinth Gardens</h3>
-            <p>Geometric walking path surrounded by fragrant herbs.</p>
-          </div>
-
-          <div class="garden-card" onclick="openModal('chapel')">
-            <i class="fa-solid fa-church text-2xl text-purple-600 mb-2"></i>
-            <h3>The Chapel Gardens</h3>
-            <p>Serene reflection bed with white floral displays.</p>
-          </div>
-
-          <div class="garden-card featured" onclick="openModal('suzie')">
-            <i class="fa-solid fa-om text-2xl text-amber-600 mb-2"></i>
-            <h3>Suzie's Garden (The Gazebo)</h3>
-            <p>Shade garden with 'Black Scallop' Ajuga, Foxtail Ferns, Mahonia, Cast Iron Plants, and Liriope.</p>
-          </div>
-
-          <div class="garden-card" onclick="openModal('children')">
-            <i class="fa-solid fa-graduation-cap text-2xl text-teal-600 mb-2"></i>
-            <h3>The Gardening School & Children's Garden</h3>
-            <p>Educational raised beds and soil research plots.</p>
-          </div>
-
-        </div>
+        <span class="text-amber-600 text-sm font-semibold mt-4 inline-flex items-center">Learn More &rarr;</span>
       </div>
-    </section>
+
+      <!-- Suzie's Garden -->
+      <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-slate-100 flex flex-col justify-between" onclick="openModal('suzie')">
+        <div>
+          <i class="fa-solid fa-seedling text-2xl text-emerald-600 mb-3"></i>
+          <h3 class="text-xl font-serif font-bold text-slate-900 mb-2">Suzie's Garden (The Gazebo)</h3>
+          <p class="text-slate-600 text-sm">Precision shade bed featuring Ajuga, Foxtail Ferns, and structured organic soil building.</p>
+        </div>
+        <span class="text-amber-600 text-sm font-semibold mt-4 inline-flex items-center">Learn More &rarr;</span>
+      </div>
+
+      <!-- The Meadow Gardens -->
+      <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-slate-100 flex flex-col justify-between" onclick="openModal('meadow')">
+        <div>
+          <i class="fa-solid fa-spa text-2xl text-amber-600 mb-3"></i>
+          <h3 class="text-xl font-serif font-bold text-slate-900 mb-2">The Meadow Gardens</h3>
+          <p class="text-slate-600 text-sm">Full sun native prairie zone with drought-tolerant flora and pollinator hubs.</p>
+        </div>
+        <span class="text-amber-600 text-sm font-semibold mt-4 inline-flex items-center">Learn More &rarr;</span>
+      </div>
+
+      <!-- The Labyrinth Gardens -->
+      <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-slate-100 flex flex-col justify-between" onclick="openModal('labyrinth')">
+        <div>
+          <i class="fa-solid fa-circle-nodes text-2xl text-indigo-600 mb-3"></i>
+          <h3 class="text-xl font-serif font-bold text-slate-900 mb-2">The Labyrinth Gardens</h3>
+          <p class="text-slate-600 text-sm">Geometric walking path surrounded by fragrant herbs and meditative plantings.</p>
+        </div>
+        <span class="text-amber-600 text-sm font-semibold mt-4 inline-flex items-center">Learn More &rarr;</span>
+      </div>
+
+      <!-- The Chapel Gardens -->
+      <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-slate-100 flex flex-col justify-between" onclick="openModal('chapel')">
+        <div>
+          <i class="fa-solid fa-church text-2xl text-slate-600 mb-3"></i>
+          <h3 class="text-xl font-serif font-bold text-slate-900 mb-2">The Chapel Gardens</h3>
+          <p class="text-slate-600 text-sm">Serene reflection bed with white floral displays and acid-loving specimens.</p>
+        </div>
+        <span class="text-amber-600 text-sm font-semibold mt-4 inline-flex items-center">Learn More &rarr;</span>
+      </div>
+
+      <!-- The Gardening School Beds -->
+      <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-slate-100 flex flex-col justify-between" onclick="openModal('children')">
+        <div>
+          <i class="fa-solid fa-graduation-cap text-2xl text-emerald-600 mb-3"></i>
+          <h3 class="text-xl font-serif font-bold text-slate-900 mb-2">The Gardening School Beds</h3>
+          <p class="text-slate-600 text-sm">Educational raised beds and soil research plots for practical learning.</p>
+        </div>
+        <span class="text-amber-600 text-sm font-semibold mt-4 inline-flex items-center">Learn More &rarr;</span>
+      </div>
+
+    </div>
   </main>
 
-  <!-- SITE FOOTER -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p class="footer-title">The Gardens at Zion</p>
-      <p class="footer-email"><a href="mailto:thegardensatzion@gmail.com">thegardensatzion@gmail.com</a></p>
-    </div>
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-sm text-slate-500 mt-auto">
+    <p>&copy; 2026 The Gardens at Zion. All rights reserved.</p>
   </footer>
 
-  <!-- DETAIL MODAL POPUP -->
-  <div id="modal-overlay" class="modal-overlay hidden" onclick="closeModal()">
-    <div class="modal-box" onclick="event.stopPropagation()">
-      <button class="modal-close" onclick="closeModal()">&times;</button>
-      <div id="modal-body"></div>
+  <!-- Modal Overlay Structure (Clean, no bottom buttons) -->
+  <div id="modal-overlay" class="hidden" onclick="closeModal()" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; z-index:9999; padding:1rem;">
+    <div class="modal-content" onclick="event.stopPropagation()" style="background:#ffffff; border-radius:12px; width:100%; max-width:650px; max-height:85vh; display:flex; flex-direction:column; overflow:hidden; position:relative; box-shadow:0 20px 25px -5px rgba(0,0,0,0.2);">
+      <!-- Close X button -->
+      <button onclick="closeModal()" style="position:absolute; top:1rem; right:1rem; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#64748b; z-index:10; width:36px; height:36px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:#f1f5f9;">&times;</button>
+      <!-- Scrollable Body -->
+      <div class="modal-body" id="modal-body" style="padding:2rem; overflow-y:auto; -webkit-overflow-scrolling:touch; flex:1 1 auto;"></div>
     </div>
   </div>
 
+  <!-- JavaScript Logic -->
   <script src="script.js"></script>
- <script>
+  <script>
     const gardenData = {
       suzie: {
         title: "Suzie's Garden (The Gazebo Area)",
@@ -229,43 +127,6 @@
         </p>
         <p style="margin-bottom: 1.25rem; line-height: 1.6;">
           As you approach The Fountain Gardens, water flowing over the edges is mirrored by cascading foliage that streams outward across the bed. Human life began in water, Christian life begins at baptism, and all life depends on water; so the fountain serves as a symbol of our origination and the source of our continuation. You are immediately offered a choice: follow the vibrant reds straight ahead or turn toward the brilliant yellows on the left. In the brilliance of the Texas sun, these well-adapted, drought- and heat-tolerant plants radiate with intense warmth, then shift in depth and tone as you move around the bed. The true surprise waits just behind the fountain—a tranquil field of blues. Looking back from the rear of the garden, the fountain aligns almost as a baptismal font, framed by the main sanctuary. From here, another choice awaits: a trip through the Labyrinth, or sitting on a bench in the shade overlooking the valley.
-        </p>
-        <a href="fountain-gardens.html" style="display:inline-block; background-color:#d97706; color:#ffffff; padding:10px 16px; border-radius:8px; text-decoration:none; font-weight:bold; margin-top:0.5rem;">
-          Explore Full Plant Palette, Layout &amp; Soil Blueprint →
-        </a>`
-      },
-      meadow: { title: "The Meadow Gardens", desc: "Full sun native prairie zone.", palette: ["Purple Coneflower", "Mexican Feathergrass", "Salvia"], protocol: "Low-water drip irrigation." },
-      labyrinth: { title: "The Labyrinth Gardens", desc: "Meditation path.", palette: ["English Lavender", "Boxwood", "Creeping Thyme"], protocol: "Well-drained soil maintenance." },
-      chapel: { title: "The Chapel Gardens", desc: "Shade reflection garden.", palette: ["White Hydrangea", "Gardenia", "Japanese Maple"], protocol: "Organic acidifying soil treatment." },
-      children: { title: "The Gardening School Beds", desc: "Interactive teaching plots.", palette: ["Seasonal Produce", "Heritage Tomatoes"], protocol: "Enriched compost and organic liquid drenches." }
-    };
-
-   <!-- Modal Overlay Structure -->
-  <div id="modal-overlay" class="hidden" onclick="closeModal()" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; z-index:9999; padding:1rem;">
-    <div class="modal-content" onclick="event.stopPropagation()" style="background:#ffffff; border-radius:12px; width:100%; max-width:650px; max-height:80vh; display:flex; flex-direction:column; overflow:hidden; position:relative; box-shadow:0 20px 25px -5px rgba(0,0,0,0.2);">
-      <!-- Close X button -->
-      <button onclick="closeModal()" style="position:absolute; top:1rem; right:1rem; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#64748b; z-index:10;">&times;</button>
-      <!-- Scrollable Body -->
-      <div class="modal-body" id="modal-body" style="padding:2rem; overflow-y:auto; -webkit-overflow-scrolling:touch; flex:1 1 auto;"></div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-  <script>
-    const gardenData = {
-      suzie: {
-        title: "Suzie's Garden (The Gazebo Area)",
-        desc: "A precision shade bed designed to thrive in heavy builder soil through structured organic soil building.",
-        palette: ["'Black Scallop' Ajuga (Double perimeter ribbon)", "Foxtail Ferns", "'Funky Flow' Mahonia", "Cast Iron Plants", "Liriope"],
-        protocol: "Medina 3-in-1 Master Drench (Soil Activator, Hasta Gro, Liquid Seaweed/Humic Acid), 1\" compost layer, 2\" bark mulch."
-      },
-      fountain: {
-        title: "The Fountain Gardens",
-        desc: `<p style="margin-bottom: 1rem; line-height: 1.6;">
-          Inspired by Claude Monet's garden at Giverny and the impressionist musical works of Debussy and Satie, The Fountain Gardens center around a tiered water feature surrounded by sweeping primary color fields of red, yellow, and blue. 
-        </p>
-        <p style="margin-bottom: 1.25rem; line-height: 1.6;">
-          Engineered over a 22' x 22' D-shaped footprint utilizing a 20-cubic-yard arborist wood chip perimeter berm, the bed is filled with a custom root-zone matrix of 75% molasses-based organic compost, 20% enriched topsoil, and 5% native site soil. This high-compost biological engine lowers local pH to unlock micronutrients across heavy Texas clay.
         </p>
         <a href="fountain-gardens.html" style="display:inline-block; background-color:#d97706; color:#ffffff; padding:10px 16px; border-radius:8px; text-decoration:none; font-weight:bold; margin-top:0.5rem;">
           Explore Full Plant Palette, Layout &amp; Soil Blueprint &rarr;
@@ -283,16 +144,16 @@
 
       if (key === 'fountain') {
         document.getElementById('modal-body').innerHTML = `
-          <h3 style="margin-top:0; color:#0f172a; font-family:Georgia, serif; font-size:1.5rem;">${item.title}</h3>
+          <h3 style="margin-top:0; color:#0f172a; font-family:Georgia, serif; font-size:1.5rem; margin-bottom:1rem;">${item.title}</h3>
           <div style="color:#334155;">${item.desc}</div>
         `;
       } else {
         document.getElementById('modal-body').innerHTML = `
-          <h3 style="margin-top:0; color:#0f172a;">${item.title}</h3>
+          <h3 style="margin-top:0; color:#0f172a; font-family:Georgia, serif; font-size:1.5rem; margin-bottom:1rem;">${item.title}</h3>
           <p style="line-height: 1.6; margin-bottom: 1rem;">${item.desc}</p>
-          <h4 style="margin-bottom:0.5rem; color:#d97706;">Plant Palette:</h4>
-          <ul style="margin-bottom: 1rem; padding-left: 1.25rem;">${item.palette ? item.palette.map(p => `<li>${p}</li>`).join('') : ''}</ul>
-          <h4 style="margin-bottom:0.5rem; color:#d97706;">Soil & Care Protocol:</h4>
+          <h4 style="margin-bottom:0.5rem; color:#d97706; font-weight:bold;">Plant Palette:</h4>
+          <ul style="margin-bottom: 1rem; padding-left: 1.25rem; list-style-type:disc;">${item.palette ? item.palette.map(p => `<li style="margin-bottom:0.25rem;">${p}</li>`).join('') : ''}</ul>
+          <h4 style="margin-bottom:0.5rem; color:#d97706; font-weight:bold;">Soil & Care Protocol:</h4>
           <p style="margin-bottom: 0;"><strong>${item.protocol || ''}</strong></p>
         `;
       }

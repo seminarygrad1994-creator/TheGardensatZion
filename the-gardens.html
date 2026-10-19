@@ -240,31 +240,24 @@
       children: { title: "The Gardening School Beds", desc: "Interactive teaching plots.", palette: ["Seasonal Produce", "Heritage Tomatoes"], protocol: "Enriched compost and organic liquid drenches." }
     };
 
-    function openModal(key) {
+   function openModal(key) {
       const item = gardenData[key];
       if (!item) return;
 
       if (key === 'fountain') {
         document.getElementById('modal-body').innerHTML = `
           <h3 style="margin-top:0; color:#0f172a; font-family:Georgia, serif; font-size:1.5rem;">${item.title}</h3>
-          <div style="color:#334155;">${item.desc}</div>
+          <div style="color:#334155; line-height: 1.6; margin-bottom: 1rem;">${item.desc}</div>
         `;
       } else {
         document.getElementById('modal-body').innerHTML = `
           <h3 style="margin-top:0; color:#0f172a;">${item.title}</h3>
-          <p>${item.desc}</p>
+          <p style="line-height: 1.6; margin-bottom: 1rem;">${item.desc}</p>
           <h4 style="margin-bottom:0.5rem; color:#d97706;">Plant Palette:</h4>
-          <ul>${item.palette ? item.palette.map(p => `<li>${p}</li>`).join('') : ''}</ul>
+          <ul style="margin-bottom: 1rem; padding-left: 1.25rem;">${item.palette ? item.palette.map(p => `<li>${p}</li>`).join('') : ''}</ul>
           <h4 style="margin-bottom:0.5rem; color:#d97706;">Soil & Care Protocol:</h4>
-          <p><strong>${item.protocol || ''}</strong></p>
+          <p style="margin-bottom: 0;"><strong>${item.protocol || ''}</strong></p>
         `;
       }
       document.getElementById('modal-overlay').classList.remove('hidden');
     }
-
-    function closeModal() {
-      document.getElementById('modal-overlay').classList.add('hidden');
-    }
-  </script>
-</body>
-</html>

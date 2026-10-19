@@ -100,11 +100,11 @@
     <p>&copy; 2026 The Gardens at Zion. All rights reserved.</p>
   </footer>
 
-  <!-- Modal Overlay Structure (Clean, no bottom buttons) -->
-  <div id="modal-overlay" class="hidden" onclick="closeModal()" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; z-index:9999; padding:1rem;">
+<!-- Modal Overlay Structure (Clean, no bottom buttons) -->
+  <div id="modal-overlay" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-[9999] p-4" onclick="closeModal()">
     <div class="modal-content" onclick="event.stopPropagation()" style="background:#ffffff; border-radius:12px; width:100%; max-width:650px; max-height:85vh; display:flex; flex-direction:column; overflow:hidden; position:relative; box-shadow:0 20px 25px -5px rgba(0,0,0,0.2);">
       <!-- Close X button -->
-      <button onclick="closeModal()" style="position:absolute; top:1rem; right:1rem; background:none; border:none; font-size:1.5rem; cursor:pointer; color:#64748b; z-index:10; width:36px; height:36px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:#f1f5f9;">&times;</button>
+      <button onclick="closeModal()" style="position:absolute; top:1rem; right:1rem; border:none; font-size:1.5rem; cursor:pointer; color:#64748b; z-index:10; width:36px; height:36px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:#f1f5f9;">&times;</button>
       <!-- Scrollable Body -->
       <div class="modal-body" id="modal-body" style="padding:2rem; overflow-y:auto; -webkit-overflow-scrolling:touch; flex:1 1 auto;"></div>
     </div>

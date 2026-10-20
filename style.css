@@ -386,6 +386,7 @@ h2.center + .prose { margin-top: 11px; }
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
   display: inline-block;
+}
 /* ==========================================
    FORCE MODAL SCROLL & BUTTON VISIBILITY
    ========================================== */

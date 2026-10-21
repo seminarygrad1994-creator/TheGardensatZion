@@ -27,6 +27,35 @@
     </div>
   </header>
 
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Gardens at Zion - Home</title>
+  <!-- Tailwind CSS & FontAwesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+  <!-- Header / Navigation -->
+  <header class="bg-white shadow-sm py-4 px-6">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+      <h1 class="text-2xl font-serif font-bold text-slate-900">The Gardens at Zion</h1>
+      <nav class="flex flex-wrap justify-center gap-4 md:gap-6 text-sm md:text-base font-medium">
+        <a href="index.html" class="text-amber-600 font-semibold transition">Home</a>
+        <a href="the-gardens.html" class="text-slate-600 hover:text-amber-600 transition">The Gardens</a>
+        <a href="gardening-school.html" class="text-slate-600 hover:text-amber-600 transition">The Gardening School</a>
+        <a href="podcast.html" class="text-slate-600 hover:text-amber-600 transition">Podcast</a>
+        <a href="resources.html" class="text-slate-600 hover:text-amber-600 transition">Resources</a>
+        <a href="bio.html" class="text-slate-600 hover:text-amber-600 transition">Bio</a>
+        <a href="contact.html" class="text-slate-600 hover:text-amber-600 transition">Contact</a>
+      </nav>
+    </div>
+  </header>
+
   <!-- Hero Banner with Sunset Photo -->
   <section class="relative bg-slate-900 text-white py-20 px-6 mb-12 bg-cover bg-center" style="background-image: linear-gradient(rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.65)), url('images/hero-sunset.jpg');">
     <div class="max-w-4xl mx-auto text-center">
@@ -37,6 +66,84 @@
       </p>
     </div>
   </section>
+
+  <!-- Main Content Container -->
+  <main class="max-w-4xl mx-auto px-6 flex-grow mb-16 w-full">
+    <article class="bg-white p-8 md:p-12 rounded-xl shadow-md border border-slate-200">
+      
+      <!-- Article Header -->
+      <header class="mb-8 border-b border-slate-100 pb-6 text-center">
+        <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-2">What Are The Gardens?</h2>
+        <p class="text-amber-700 font-semibold tracking-wide text-sm md:text-base">Grown in Texas, Rooted in Research.</p>
+      </header>
+
+      <!-- Narrative Section -->
+      <div class="space-y-6 text-slate-700 leading-relaxed text-lg mb-12">
+        <p>
+          Located in northwest Bexar County, The Gardens at Zion are on Edwards Plateau soil—thin, heavy clay and gravelly. The Gardens represent “best practices” in Texas gardening as defined by TAMU-College Station: build good soil, plant correct plants in the correct location, minimal watering, minimal chemicals for weed &amp; pest control.
+        </p>
+        <p>
+          The beds for the gardens are 6–8” of extremely well amended soil; the raised beds were outlined by 8–10” of single shredded mulch. Most of the plants were propagated from plants that I found growing here, either by seed or cuttings. The idea was, if the plants were thriving here, then those were the plants that I wanted in The Gardens.
+        </p>
+        <p>
+          The empty space in front of the historic Chapel was primarily weeds and “dirt”. It is now filled with well adapted plants: salvia, lantana, and wildflowers. The area to the northwest of the Chapel was an empty lot that once had a house and, later, portable buildings. It is now a Children’s Garden, a garden with a fountain as its centerpiece, and a covered pergola—with solar lights for night illumination.
+        </p>
+      </div>
+
+      <!-- Image Showcase Grid -->
+      <h3 class="text-2xl font-serif font-bold text-slate-900 mb-6 border-t border-slate-100 pt-8">Visualizing the Evolution</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Image 1 -->
+        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 flex flex-col justify-between">
+          <img src="images/home-1.jpg" alt="Chapel bed before transformation" class="w-full h-56 object-cover rounded-md mb-3 shadow-sm">
+          <p class="text-sm text-slate-600 text-center italic">The empty space in front of the historic Chapel (before).</p>
+        </div>
+
+        <!-- Image 2 -->
+        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 flex flex-col justify-between">
+          <img src="images/home-2.jpg" alt="Chapel bed after planting" class="w-full h-56 object-cover rounded-md mb-3 shadow-sm">
+          <p class="text-sm text-slate-600 text-center italic">Now filled with well-adapted salvia, lantana, and perennials.</p>
+        </div>
+
+        <!-- Image 3 -->
+        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 flex flex-col justify-between">
+          <img src="images/home-3.jpg" alt="Northwest Bexar County landscape view" class="w-full h-56 object-cover rounded-md mb-3 shadow-sm">
+          <p class="text-sm text-slate-600 text-center italic">Looking out across the Northwest Bexar County landscape.</p>
+        </div>
+
+        <!-- Image 4 -->
+        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 flex flex-col justify-between">
+          <img src="images/home-4.jpg" alt="Fountain center with flowers" class="w-full h-56 object-cover rounded-md mb-3 shadow-sm">
+          <p class="text-sm text-slate-600 text-center italic">The fountain centerpiece surrounded by thriving native flora.</p>
+        </div>
+
+        <!-- Image 5 -->
+        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 flex flex-col justify-between">
+          <img src="images/home-5.jpg" alt="Soil amending and mulch work" class="w-full h-56 object-cover rounded-md mb-3 shadow-sm">
+          <p class="text-sm text-slate-600 text-center italic">Laying down well-amended soil and single shredded mulch rings.</p>
+        </div>
+
+        <!-- Image 6 -->
+        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 flex flex-col justify-between">
+          <img src="images/home-6.jpg" alt="Pergola at night with solar lights" class="w-full h-56 object-cover rounded-md mb-3 shadow-sm">
+          <p class="text-sm text-slate-600 text-center italic">The covered pergola illuminated by solar lights for night viewing.</p>
+        </div>
+
+      </div>
+
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-sm text-slate-500 mt-auto">
+    <p>&copy; 2026 The Gardens at Zion. All rights reserved.</p>
+    <p class="text-xs text-slate-400 mt-1">Contact: <a href="mailto:thegardensatzion@gmail.com" class="hover:underline text-slate-500">thegardensatzion@gmail.com</a></p>
+  </footer>
+
+</body>
+</html>
 
   <!-- Main Content Container -->
   <main class="max-w-4xl mx-auto px-6 flex-grow mb-16 w-full">

@@ -1,18 +1,64 @@
-<!-- Header / Navigation -->
-  <header class="bg-white shadow-sm py-4 px-6 sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-      <h1 class="text-2xl font-serif font-bold text-slate-900">
-        <a href="index.html">The Gardens at Zion</a>
-      </h1>
-      <nav class="flex flex-wrap justify-center gap-4 md:gap-6 text-sm md:text-base font-medium">
-        <a href="index.html" class="text-slate-600 hover:text-amber-600 transition">Home</a>
-        <a href="what-are-the-gardens.html" class="text-slate-600 hover:text-amber-600 transition">Our Story</a>
-        <a href="the-gardens.html" class="text-slate-600 hover:text-amber-600 transition">The Gardens</a>
-        <a href="gardening-school.html" class="text-slate-600 hover:text-amber-600 transition">The Gardening School</a>
-        <a href="podcast.html" class="text-slate-600 hover:text-amber-600 transition">Podcast</a>
-        <a href="resources.html" class="text-slate-600 hover:text-amber-600 transition">Resources</a>
-        <a href="bio.html" class="text-slate-600 hover:text-amber-600 transition">Bio</a>
-        <a href="contact.html" class="text-slate-600 hover:text-amber-600 transition">Contact</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Gardens at Zion</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Built-in Safety Styles (Guarantees it never breaks if scripts are blocked) -->
+  <style>
+    body { background-color: #0f172a; color: #ffffff; font-family: sans-serif; margin: 0; min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; }
+    header { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); padding: 1rem 1.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    .nav-container { max-width: 72rem; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 1rem; }
+    @media(min-width: 768px) { .nav-container { flex-direction: row; } }
+    h1 a { color: #ffffff; text-decoration: none; font-family: serif; font-size: 1.5rem; font-weight: bold; }
+    nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; font-size: 0.95rem; font-weight: 500; }
+    nav a { color: #cbd5e1; text-decoration: none; transition: color 0.2s; }
+    nav a:hover, nav a.active { color: #fbbf24; }
+    .hero { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 5rem 1.5rem; background: linear-gradient(rgba(15, 23, 42, 0.45), rgba(15, 23, 42, 0.55)), url('images/hero-sunset.jpg') center/cover no-repeat; }
+    footer { background: rgba(15, 23, 42, 0.95); padding: 1rem; text-align: center; font-size: 0.75rem; color: #94a3b8; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+    footer a { color: #fbbf24; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar Overlaid on Sunset -->
+  <header>
+    <div class="nav-container">
+      <h1><a href="index.html">The Gardens at Zion</a></h1>
+      <nav>
+        <a href="index.html" class="active" style="color: #fbbf24; font-weight: 600; border-bottom: 2px solid #fbbf24; padding-bottom: 2px;">Home</a>
+        <a href="what-are-the-gardens.html">Our Story</a>
+        <a href="the-gardens.html">The Gardens</a>
+        <a href="gardening-school.html">The Gardening School</a>
+        <a href="podcast.html">Podcast</a>
+        <a href="resources.html">Resources</a>
+        <a href="bio.html">Bio</a>
+        <a href="contact.html">Contact</a>
       </nav>
     </div>
   </header>
+
+  <!-- Central Title Display on Sunset -->
+  <main class="hero">
+    <div style="max-width: 56rem; margin: 0 auto;">
+      <p style="color: #fbbf24; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 0.75rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+        Grown in Texas &bull; Rooted in Research
+      </p>
+      <h2 style="font-size: 3rem; font-family: serif; font-weight: bold; margin-bottom: 1.5rem; text-shadow: 0 4px 8px rgba(0,0,0,0.6);">
+        The Gardens at Zion
+      </h2>
+      <p style="font-size: 1.25rem; color: #f1f5f9; max-width: 42rem; margin: 0 auto; font-weight: 300; line-height: 1.6; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+        Cultivating resilient gardens through research-based horticulture and community stewardship in Bexar County.
+      </p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 The Gardens at Zion. All rights reserved. &bull; <a href="mailto:thegardensatzion@gmail.com">thegardensatzion@gmail.com</a></p>
+  </footer>
+
+</body>
+</html>

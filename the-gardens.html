@@ -42,12 +42,16 @@
           <!-- Master Map Image -->
           <img src="images/Thisone.jpeg" alt="The Gardens at Zion Master Map" class="w-full h-auto object-contain max-h-[500px] block" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'p-8 text-slate-500 italic\'>Master map image loading. Check folder path.</div>';">
 
-         <!-- HOTSPOT 1: The Fountain Gardens (Top-Left) -->
+        <!-- HOTSPOT 1: The Fountain Gardens (Top-Left) -->
 <button onclick="openModal('fountains')" 
         title="Click to view The Fountain Gardens details"
         aria-label="The Fountain Gardens"
         style="position: absolute; top: 2%; left: 2%; width: 46%; height: 46%; background: transparent; border: none; cursor: pointer;"
         class="focus:outline-none hover:bg-amber-500/10 transition flex items-start p-3">
+  <span class="bg-slate-900/80 text-amber-300 text-xs font-semibold px-2.5 py-1 rounded-md shadow backdrop-blur-sm">
+    <i class="fa-solid fa-water mr-1"></i> The Fountain Gardens
+  </span>
+</button>
 
           <!-- HOTSPOT 2: The Meadow Gardens (Top-Center) -->
           <button onclick="openModal('meadow')" 

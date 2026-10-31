@@ -1,218 +1,776 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Gardens at Zion - Directory</title>
-  <!-- Tailwind CSS & FontAwesome -->
+  <title>The Gardens at Zion | Master Botanical Sanctuary & Interactive Directory</title>
+  
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+  
+  <!-- Google Fonts: Cinzel, Lora, & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Styling & Animations -->
   <style>
-    /* Smooth Modal Transitions */
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #0f172a; /* slate-900 */
+      color: #334155;
+    }
+    h1, h2, h3, h4, .font-serif {
+      font-family: 'Lora', serif;
+    }
+    .font-cinzel {
+      font-family: 'Cinzel', serif;
+    }
+    
+    /* Michelin Overlay Backdrop and Transitions */
     #modal-overlay {
       opacity: 0;
-      transition: opacity 0.3s ease-in-out;
-      pointer-events: none;
+      visibility: hidden;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease;
     }
     #modal-overlay.active {
       opacity: 1;
-      pointer-events: auto;
+      visibility: visible;
     }
+    
     .modal-card {
-      transform: scale(0.95);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: scale(0.94) translateY(12px);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
     #modal-overlay.active .modal-card {
-      transform: scale(1);
+      transform: scale(1) translateY(0);
+    }
+
+    /* Hotspot Pulsing & Ripple Animation */
+    @keyframes pulse-ring {
+      0% { transform: scale(0.85); opacity: 0.8; }
+      50% { transform: scale(1.4); opacity: 0; }
+      100% { transform: scale(0.85); opacity: 0; }
+    }
+    .animate-pulse-ring {
+      animation: pulse-ring 3s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    }
+
+    /* SVG Map Hover Highlights */
+    .map-zone {
+      transition: all 0.4s ease;
+    }
+    .map-zone:hover {
+      filter: brightness(1.15) drop-shadow(0 0 12px rgba(217, 119, 6, 0.4));
+      cursor: pointer;
+    }
+
+    /* Custom Scrollbar for Modal Essay Body */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+<body class="bg-slate-900 text-slate-100 flex flex-col min-h-screen selection:bg-amber-500 selection:text-slate-900">
 
-  <!-- Header / Navigation -->
-  <header class="bg-white shadow-sm py-4 px-6 mb-8 sticky top-0 z-40">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-      <h1 class="text-2xl font-serif font-bold text-slate-900">The Gardens at Zion</h1>
-      <nav class="flex flex-wrap justify-center gap-4 md:gap-6 text-sm md:text-base font-medium">
-        <a href="index.html" class="text-slate-600 hover:text-amber-600 transition">Home</a>
-        <a href="the-gardens.html" class="text-amber-600 font-semibold transition">The Gardens</a>
-        <a href="the-gardening-school.html" class="text-slate-600 hover:text-amber-600 transition">The Gardening School</a>
-        <a href="podcast.html" class="text-slate-600 hover:text-amber-600 transition">Podcast</a>
-        <a href="resources.html" class="text-slate-600 hover:text-amber-600 transition">Resources</a>
-        <a href="about.html" class="text-slate-600 hover:text-amber-600 transition">Bio</a>
-        <a href="contact.html" class="text-slate-600 hover:text-amber-600 transition">Contact</a>
+  <!-- ================= TOP LUXURY ANNOUNCEMENT BAR ================= -->
+  <div class="bg-gradient-to-r from-amber-900/60 via-amber-800/40 to-slate-900 border-b border-amber-500/20 py-2 px-4 text-xs font-medium text-amber-200/90 text-center tracking-wide">
+    <span class="inline-flex items-center gap-2">
+      <span class="inline-block w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+      Grounded in Texas A&amp;M University AgriLife Extension Research &amp; Soil Ecology Stewardship
+    </span>
+  </div>
+
+  <!-- ================= HEADER & NAVIGATION ================= -->
+  <header class="bg-slate-900/90 backdrop-blur-md sticky top-0 z-40 border-b border-slate-800 shadow-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-22 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center gap-4 group">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center shadow-lg shadow-amber-900/40 border border-amber-400/30 group-hover:scale-105 transition-transform">
+          <i class="fa-solid fa-leaf text-slate-950 text-2xl"></i>
+        </div>
+        <div>
+          <span class="font-cinzel text-xl md:text-2xl font-bold tracking-widest block text-amber-100 group-hover:text-amber-400 transition-colors">THE GARDENS AT ZION</span>
+          <span class="text-xs text-amber-500/80 tracking-widest uppercase font-semibold block -mt-1">Northwest Bexar County, Texas</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden lg:flex items-center space-x-7 text-xs uppercase tracking-widest font-semibold">
+        <a href="index.html" class="text-amber-400 border-b-2 border-amber-400 pb-1 transition-colors">Home</a>
+        <a href="index.html#story" class="text-slate-300 hover:text-amber-400 transition-colors">Our Story</a>
+        <a href="index.html#interactive-map" class="text-slate-300 hover:text-amber-400 transition-colors">The Gardens</a>
+        <a href="the-gardening-school.html" class="text-slate-300 hover:text-amber-400 transition-colors">The School</a>
+        <a href="podcast.html" class="text-slate-300 hover:text-amber-400 transition-colors">Podcast</a>
+        <a href="resources.html" class="text-slate-300 hover:text-amber-400 transition-colors">Resources</a>
+        <a href="about.html" class="text-slate-300 hover:text-amber-400 transition-colors">Bio</a>
+        <a href="contact.html" class="px-4 py-2.5 rounded-lg bg-amber-600/20 hover:bg-amber-600 text-amber-300 hover:text-slate-950 border border-amber-500/40 transition-all shadow-sm">Contact</a>
       </nav>
+
+      <!-- Mobile Navigation Button -->
+      <button id="mobile-menu-btn" class="lg:hidden text-amber-400 text-2xl focus:outline-none p-2" aria-label="Toggle mobile menu">
+        <i class="fa-solid fa-bars-staggered"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-slate-900 border-b border-slate-800 px-6 py-6 space-y-4">
+      <a href="index.html" class="block text-amber-400 font-medium py-1">Home</a>
+      <a href="index.html#story" class="block text-slate-300 hover:text-amber-400 py-1">Our Story</a>
+      <a href="index.html#interactive-map" class="block text-slate-300 hover:text-amber-400 py-1">The Gardens</a>
+      <a href="the-gardening-school.html" class="block text-slate-300 hover:text-amber-400 py-1">The Gardening School</a>
+      <a href="podcast.html" class="block text-slate-300 hover:text-amber-400 py-1">Podcast</a>
+      <a href="resources.html" class="block text-slate-300 hover:text-amber-400 py-1">Resources</a>
+      <a href="about.html" class="block text-slate-300 hover:text-amber-400 py-1">Bio</a>
+      <a href="contact.html" class="block text-amber-400 font-semibold py-1">Contact Us</a>
     </div>
   </header>
 
-  <!-- Main Grid Container -->
-  <main class="max-w-6xl mx-auto px-6 flex-grow mb-16 w-full">
-    <div class="text-center mb-8">
-      <h2 class="text-3xl font-serif font-bold text-slate-900 mb-3">Interactive Garden Directory</h2>
-      <p class="text-slate-600 max-w-2xl mx-auto mb-6">Explore the distinct garden zones across our site. Click any framed photo on the map below to view planting palettes, design philosophy, and care protocols.</p>
+  <!-- ================= HERO INTRO SECTION ================= -->
+  <section class="relative py-20 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-950">
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
       
-      <!-- Master Site Layout Display with Map Hotspots -->
-      <div class="bg-white p-4 rounded-xl shadow-md border border-slate-200 mb-10 max-w-4xl mx-auto overflow-hidden">
-        <h3 class="font-serif font-bold text-lg text-slate-800 mb-3 text-center">Master Site Layout</h3>
-        
-        <div class="w-full bg-slate-100 rounded-lg overflow-hidden relative inline-block">
-          <!-- Master Map Image -->
-          <img src="images/Thisone.jpeg" alt="The Gardens at Zion Master Map" class="w-full h-auto object-contain max-h-[500px] block" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'p-8 text-slate-500 italic\'>Master map image loading. Check folder path.</div>';">
-
-          <!-- HOTSPOT 1: The Fountain Gardens -->
-          <button onclick="openModal('fountain')" title="The Fountain Gardens" style="position: absolute; top: 5%; left: 2%; width: 18%; height: 35%; background: transparent; border: none; cursor: pointer;"></button>
-
-          <!-- HOTSPOT 2: The Meadow Gardens -->
-          <button onclick="openModal('meadow')" title="The Meadow Gardens" style="position: absolute; top: 10%; left: 38%; width: 22%; height: 30%; background: transparent; border: none; cursor: pointer;"></button>
-
-          <!-- HOTSPOT 3: The Labyrinth Gardens -->
-          <button onclick="openModal('labyrinth')" title="The Labyrinth Gardens" style="position: absolute; top: 8%; left: 72%; width: 25%; height: 35%; background: transparent; border: none; cursor: pointer;"></button>
-
-          <!-- HOTSPOT 4: The Chapel Gardens -->
-          <button onclick="openModal('chapel')" title="The Chapel Gardens" style="position: absolute; top: 68%; left: 2%; width: 24%; height: 30%; background: transparent; border: none; cursor: pointer;"></button>
-
-          <!-- HOTSPOT 5: Suzie's Gazebo Gardens -->
-          <button onclick="openModal('suzie')" title="Suzie's Garden" style="position: absolute; top: 68%; left: 42%; width: 22%; height: 30%; background: transparent; border: none; cursor: pointer;"></button>
-
-          <!-- HOTSPOT 6: The Gardening School Beds -->
-          <button onclick="openModal('children')" title="The Gardening School Beds" style="position: absolute; top: 68%; left: 80%; width: 18%; height: 30%; background: transparent; border: none; cursor: pointer;"></button>
-        </div>
-        <p class="text-xs text-slate-500 text-center mt-2 italic">Click any photo frame on the map above to explore its story.</p>
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs tracking-widest uppercase mb-6 font-semibold shadow-inner">
+        <i class="fa-solid fa-compass text-amber-400"></i> Northwest Bexar County Sanctuary
       </div>
-    </div>
-  </main>
+      
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-amber-100 tracking-tight leading-tight">
+        Where Landscape Architecture Meets <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600">Spiritual Quietude</span>
+      </h1>
+      
+      <p class="mt-6 text-slate-300 text-lg md:text-xl font-light leading-relaxed max-w-3xl mx-auto">
+        A deliberate act of land restoration and sacred space design. Discover six distinct garden zones engineered for South Texas soil restoration, neurological serenity, and deep reflection.
+      </p>
 
-  <!-- Footer -->
-  <footer class="bg-white border-t border-slate-200 py-6 text-center text-sm text-slate-500 mt-auto">
-    <p>&copy; 2026 The Gardens at Zion. All rights reserved.</p>
+      <div class="mt-10 flex flex-wrap justify-center gap-4">
+        <a href="#interactive-map" class="px-8 py-4 rounded-xl bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-semibold text-sm tracking-widest uppercase shadow-lg shadow-amber-950/60 transition-all transform hover:-translate-y-0.5">
+          <i class="fa-solid fa-map-marked-alt mr-2"></i> Explore Interactive Map
+        </a>
+        <a href="#directory-grid" class="px-8 py-4 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-amber-200 border border-amber-500/30 font-semibold text-sm tracking-widest uppercase transition-all">
+          <i class="fa-solid fa-layer-group mr-2"></i> View Garden Directory
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= INTERACTIVE MASTER MAP SECTION ================= -->
+  <section id="interactive-map" class="py-16 bg-slate-950 relative border-t border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-amber-500 font-cinzel text-xs font-semibold tracking-widest uppercase block mb-2">Master Architectural Site Plan</span>
+        <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-100">Interactive Botanical Map</h2>
+        <p class="mt-3 text-slate-400 text-sm md:text-base">
+          Hover and click on any garden zone or illuminated hotspot below to open its design essay, plant palette, and soil restoration protocol.
+        </p>
+      </div>
+
+      <!-- MAP CONTAINER -->
+      <div class="max-w-5xl mx-auto bg-slate-900 p-4 md:p-6 rounded-3xl border border-amber-500/30 shadow-2xl shadow-slate-950 relative overflow-hidden">
+        
+        <!-- Legend Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-800 text-xs text-slate-400">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+            <span class="font-medium text-slate-300">Sanctuary Zone Hotspot</span>
+          </div>
+          <div class="flex items-center gap-6">
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-sun text-amber-400"></i> Full Sun</span>
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-cloud-sun text-emerald-400"></i> Partial Canopy</span>
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-tree text-indigo-400"></i> Deep Shade</span>
+          </div>
+        </div>
+
+        <!-- SVG Visual Layout Map & Hotspot Canvas -->
+        <div class="relative w-full aspect-[16/10] bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 group shadow-inner">
+          
+          <!-- Vector Architectural Plan Overlay -->
+          <svg class="w-full h-full object-cover" viewBox="0 0 1000 625" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Soil Bed Base Lines -->
+            <rect width="1000" height="625" fill="#0f172a"/>
+            <path d="M 0 312 Q 500 280 1000 312" stroke="#334155" stroke-width="2" stroke-dasharray="8 8"/>
+            <path d="M 500 0 Q 520 312 500 625" stroke="#334155" stroke-width="2" stroke-dasharray="8 8"/>
+
+            <!-- Zone 1: The Fountain Gardens (Top-Left) -->
+            <g class="map-zone" onclick="openModal('fountain')">
+              <rect x="40" y="40" width="420" height="250" rx="16" fill="#1e293b" stroke="#38bdf8" stroke-width="2" opacity="0.8"/>
+              <circle cx="250" cy="165" r="55" fill="#0284c7" fill-opacity="0.25" stroke="#38bdf8" stroke-width="2"/>
+              <circle cx="250" cy="165" r="28" fill="#0369a1" stroke="#bae6fd" stroke-width="2"/>
+              <text x="250" y="245" text-anchor="middle" fill="#f0f9ff" font-family="Lora" font-size="16" font-weight="600">The Fountain Gardens</text>
+              <text x="250" y="265" text-anchor="middle" fill="#7dd3fc" font-size="11" font-family="Plus Jakarta Sans">Giverny Impressionism &amp; Waters</text>
+            </g>
+
+            <!-- Zone 2: The Meadow Gardens & Arboretum (Top-Right) -->
+            <g class="map-zone" onclick="openModal('meadow')">
+              <rect x="540" y="40" width="420" height="250" rx="16" fill="#1e293b" stroke="#f59e0b" stroke-width="2" opacity="0.8"/>
+              <path d="M 570 160 Q 640 90 750 160 T 930 160" fill="none" stroke="#d97706" stroke-width="3" stroke-dasharray="6 4"/>
+              <circle cx="680" cy="120" r="18" fill="#d97706" fill-opacity="0.3"/>
+              <circle cx="820" cy="140" r="24" fill="#b45309" fill-opacity="0.3"/>
+              <text x="750" y="245" text-anchor="middle" fill="#fef3c7" font-family="Lora" font-size="16" font-weight="600">The Meadow &amp; Arboretum</text>
+              <text x="750" y="265" text-anchor="middle" fill="#fcd34d" font-size="11" font-family="Plus Jakarta Sans">Soil Biology Restoration &amp; Canopy</text>
+            </g>
+
+            <!-- Zone 3: The Labyrinth Gardens (Middle Center Right) -->
+            <g class="map-zone" onclick="openModal('labyrinth')">
+              <rect x="540" y="335" width="420" height="250" rx="16" fill="#1e293b" stroke="#818cf8" stroke-width="2" opacity="0.8"/>
+              <!-- Unicursal Ring Vector Graphics -->
+              <circle cx="750" cy="445" r="65" fill="none" stroke="#6366f1" stroke-width="2"/>
+              <circle cx="750" cy="445" r="48" fill="none" stroke="#818cf8" stroke-width="1.5"/>
+              <circle cx="750" cy="445" r="32" fill="none" stroke="#c7d2fe" stroke-width="1.5"/>
+              <circle cx="750" cy="445" r="14" fill="#4338ca"/>
+              <text x="750" y="540" text-anchor="middle" fill="#e0e7ff" font-family="Lora" font-size="16" font-weight="600">The Labyrinth Gardens</text>
+              <text x="750" y="560" text-anchor="middle" fill="#a5b4fc" font-size="11" font-family="Plus Jakarta Sans">Unicursal Neuroscience Sanctuary</text>
+            </g>
+
+            <!-- Zone 4: The Chapel Gardens (Bottom Left) -->
+            <g class="map-zone" onclick="openModal('chapel')">
+              <rect x="40" y="335" width="230" height="250" rx="16" fill="#1e293b" stroke="#94a3b8" stroke-width="2" opacity="0.8"/>
+              <path d="M 155 385 L 195 445 L 115 445 Z" fill="#475569" stroke="#cbd5e1" stroke-width="2"/>
+              <rect x="145" y="445" width="20" height="35" fill="#334155"/>
+              <text x="155" y="540" text-anchor="middle" fill="#f8fafc" font-family="Lora" font-size="16" font-weight="600">The Chapel Gardens</text>
+              <text x="155" y="560" text-anchor="middle" fill="#cbd5e1" font-size="11" font-family="Plus Jakarta Sans">1904 Bexar Founders Heritage</text>
+            </g>
+
+            <!-- Zone 5: Suzie's Garden / Gazebo (Bottom Mid-Left) -->
+            <g class="map-zone" onclick="openModal('suzie')">
+              <rect x="290" y="335" width="220" height="120" rx="16" fill="#1e293b" stroke="#10b981" stroke-width="2" opacity="0.8"/>
+              <circle cx="400" cy="380" r="22" fill="#047857" fill-opacity="0.4" stroke="#34d399" stroke-width="2"/>
+              <text x="400" y="422" text-anchor="middle" fill="#ecfdf5" font-family="Lora" font-size="14" font-weight="600">Suzie's Gazebo Garden</text>
+              <text x="400" y="440" text-anchor="middle" fill="#6ee7b7" font-size="10" font-family="Plus Jakarta Sans">Shade Canopy &amp; Textures</text>
+            </g>
+
+            <!-- Zone 6: The Gardening School Beds (Bottom Mid-Left Low) -->
+            <g class="map-zone" onclick="openModal('children')">
+              <rect x="290" y="465" width="220" height="120" rx="16" fill="#1e293b" stroke="#f59e0b" stroke-width="2" opacity="0.8"/>
+              <rect x="315" y="485" width="50" height="24" rx="4" fill="#78350f" stroke="#d97706"/>
+              <rect x="375" y="485" width="50" height="24" rx="4" fill="#78350f" stroke="#d97706"/>
+              <rect x="435" y="485" width="50" height="24" rx="4" fill="#78350f" stroke="#d97706"/>
+              <text x="400" y="542" text-anchor="middle" fill="#fffbeb" font-family="Lora" font-size="14" font-weight="600">Gardening School Beds</text>
+              <text x="400" y="560" text-anchor="middle" fill="#fcd34d" font-size="10" font-family="Plus Jakarta Sans">Living Extension Science</text>
+            </g>
+          </svg>
+
+          <!-- DYNAMIC PULSING ANIMATED HOTSPOTS -->
+          <!-- Hotspot 1: Fountain -->
+          <button onclick="openModal('fountain')" class="absolute top-[26%] left-[25%] -translate-x-1/2 -translate-y-1/2 group/btn focus:outline-none" title="Explore The Fountain Gardens">
+            <span class="absolute -inset-3 rounded-full bg-sky-500/40 animate-pulse-ring"></span>
+            <span class="relative flex items-center justify-center w-8 h-8 rounded-full bg-sky-500 text-slate-950 text-xs font-bold shadow-lg shadow-sky-500/50 group-hover/btn:scale-110 transition-transform">
+              <i class="fa-solid fa-water"></i>
+            </span>
+          </button>
+
+          <!-- Hotspot 2: Meadow -->
+          <button onclick="openModal('meadow')" class="absolute top-[26%] left-[75%] -translate-x-1/2 -translate-y-1/2 group/btn focus:outline-none" title="Explore The Meadow Gardens">
+            <span class="absolute -inset-3 rounded-full bg-amber-500/40 animate-pulse-ring"></span>
+            <span class="relative flex items-center justify-center w-8 h-8 rounded-full bg-amber-500 text-slate-950 text-xs font-bold shadow-lg shadow-amber-500/50 group-hover/btn:scale-110 transition-transform">
+              <i class="fa-solid fa-spa"></i>
+            </span>
+          </button>
+
+          <!-- Hotspot 3: Labyrinth -->
+          <button onclick="openModal('labyrinth')" class="absolute top-[71%] left-[75%] -translate-x-1/2 -translate-y-1/2 group/btn focus:outline-none" title="Explore The Labyrinth Gardens">
+            <span class="absolute -inset-3 rounded-full bg-indigo-500/40 animate-pulse-ring"></span>
+            <span class="relative flex items-center justify-center w-8 h-8 rounded-full bg-indigo-500 text-slate-950 text-xs font-bold shadow-lg shadow-indigo-500/50 group-hover/btn:scale-110 transition-transform">
+              <i class="fa-solid fa-circle-nodes"></i>
+            </span>
+          </button>
+
+          <!-- Hotspot 4: Chapel -->
+          <button onclick="openModal('chapel')" class="absolute top-[71%] left-[15.5%] -translate-x-1/2 -translate-y-1/2 group/btn focus:outline-none" title="Explore The Chapel Gardens">
+            <span class="absolute -inset-3 rounded-full bg-slate-400/40 animate-pulse-ring"></span>
+            <span class="relative flex items-center justify-center w-8 h-8 rounded-full bg-slate-300 text-slate-950 text-xs font-bold shadow-lg shadow-slate-300/50 group-hover/btn:scale-110 transition-transform">
+              <i class="fa-solid fa-church"></i>
+            </span>
+          </button>
+
+          <!-- Hotspot 5: Suzie's Gazebo -->
+          <button onclick="openModal('suzie')" class="absolute top-[61%] left-[40%] -translate-x-1/2 -translate-y-1/2 group/btn focus:outline-none" title="Explore Suzie's Garden">
+            <span class="absolute -inset-3 rounded-full bg-emerald-500/40 animate-pulse-ring"></span>
+            <span class="relative flex items-center justify-center w-7 h-7 rounded-full bg-emerald-500 text-slate-950 text-xs font-bold shadow-lg shadow-emerald-500/50 group-hover/btn:scale-110 transition-transform">
+              <i class="fa-solid fa-seedling"></i>
+            </span>
+          </button>
+
+          <!-- Hotspot 6: Gardening School -->
+          <button onclick="openModal('children')" class="absolute top-[82%] left-[40%] -translate-x-1/2 -translate-y-1/2 group/btn focus:outline-none" title="Explore The Gardening School Beds">
+            <span class="absolute -inset-3 rounded-full bg-amber-600/40 animate-pulse-ring"></span>
+            <span class="relative flex items-center justify-center w-7 h-7 rounded-full bg-amber-600 text-slate-950 text-xs font-bold shadow-lg shadow-amber-600/50 group-hover/btn:scale-110 transition-transform">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </span>
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= FILTERABLE GARDEN DIRECTORY GRID ================= -->
+  <section id="directory-grid" class="py-20 bg-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div>
+          <span class="text-amber-500 font-cinzel text-xs font-semibold tracking-widest uppercase block mb-2">Botanical Collection</span>
+          <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-100">Garden Sanctuary Directory</h2>
+          <p class="mt-2 text-slate-400 text-sm max-w-xl">
+            Select any quadrant below to discover design narratives, regional planting palettes, and soil restoration protocols.
+          </p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap gap-2 bg-slate-950 p-1.5 rounded-xl border border-slate-800">
+          <button onclick="filterGardens('all')" class="filter-btn active text-xs font-semibold px-4 py-2 rounded-lg bg-amber-600 text-slate-950 transition-all">All Zones</button>
+          <button onclick="filterGardens('sun')" class="filter-btn text-xs font-semibold px-4 py-2 rounded-lg text-slate-300 hover:text-amber-400 transition-all">Full Sun</button>
+          <button onclick="filterGardens('shade')" class="filter-btn text-xs font-semibold px-4 py-2 rounded-lg text-slate-300 hover:text-amber-400 transition-all">Shade & Canopy</button>
+          <button onclick="filterGardens('heritage')" class="filter-btn text-xs font-semibold px-4 py-2 rounded-lg text-slate-300 hover:text-amber-400 transition-all">Heritage & Research</button>
+        </div>
+      </div>
+
+      <!-- CARDS GRID -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- CARD 1: Fountain Gardens -->
+        <div class="garden-card bg-slate-950 rounded-2xl border border-slate-800 hover:border-amber-500/40 p-6 flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 shadow-xl" data-category="sun">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-sky-950 border border-sky-500/30 flex items-center justify-center text-sky-400 text-xl group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-water"></i>
+              </div>
+              <span class="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full bg-sky-500/10 text-sky-300 border border-sky-500/20">Full Sun • Water</span>
+            </div>
+            <h3 class="text-xl font-serif font-bold text-amber-100 group-hover:text-amber-400 transition-colors mb-2">The Fountain Gardens</h3>
+            <p class="text-slate-400 text-xs leading-relaxed line-clamp-3 mb-6">
+              Inspired by Monet's Giverny and Debussy's Impressionism. Sweeping primary fields of red, yellow, and blue encircle a central baptismal font feature.
+            </p>
+          </div>
+          <div>
+            <div class="pt-4 border-t border-slate-900 flex items-center justify-between">
+              <span class="text-xs font-semibold text-slate-400">Palette: Primary Fields</span>
+              <button onclick="openModal('fountain')" class="text-amber-400 hover:text-amber-300 text-xs font-bold uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Read Essay <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2: Suzie's Gazebo Gardens -->
+        <div class="garden-card bg-slate-950 rounded-2xl border border-slate-800 hover:border-amber-500/40 p-6 flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 shadow-xl" data-category="shade">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-emerald-950 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-seedling"></i>
+              </div>
+              <span class="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">Deep Oak Shade</span>
+            </div>
+            <h3 class="text-xl font-serif font-bold text-amber-100 group-hover:text-amber-400 transition-colors mb-2">Suzie's Gazebo Gardens</h3>
+            <p class="text-slate-400 text-xs leading-relaxed line-clamp-3 mb-6">
+              Modernizing traditional church shade beds under Live Oaks. Wide Cast Iron blades, pickle-like Foxtail fern textures, 'Black Scallop' Ajuga, and 'Funky Flow' Mahonia.
+            </p>
+          </div>
+          <div>
+            <div class="pt-4 border-t border-slate-900 flex items-center justify-between">
+              <span class="text-xs font-semibold text-slate-400">Palette: Rich Greens</span>
+              <button onclick="openModal('suzie')" class="text-amber-400 hover:text-amber-300 text-xs font-bold uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Read Essay <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3: The Meadow Gardens -->
+        <div class="garden-card bg-slate-950 rounded-2xl border border-slate-800 hover:border-amber-500/40 p-6 flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 shadow-xl" data-category="sun">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-amber-950 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-spa"></i>
+              </div>
+              <span class="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20">Full Sun • Dual View</span>
+            </div>
+            <h3 class="text-xl font-serif font-bold text-amber-100 group-hover:text-amber-400 transition-colors mb-2">The Meadow &amp; Arboretum</h3>
+            <p class="text-slate-400 text-xs leading-relaxed line-clamp-3 mb-6">
+              Restoration of compacted builder clay. Serves two audiences: a serene grotto canopy for visitors and vivid warm/purple sweeps for commuters heading home.
+            </p>
+          </div>
+          <div>
+            <div class="pt-4 border-t border-slate-900 flex items-center justify-between">
+              <span class="text-xs font-semibold text-slate-400">Soil: Clay Remediation</span>
+              <button onclick="openModal('meadow')" class="text-amber-400 hover:text-amber-300 text-xs font-bold uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Read Essay <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 4: The Labyrinth Gardens -->
+        <div class="garden-card bg-slate-950 rounded-2xl border border-slate-800 hover:border-amber-500/40 p-6 flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 shadow-xl" data-category="heritage">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-indigo-950 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-xl group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-circle-nodes"></i>
+              </div>
+              <span class="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">Neuroscience Path</span>
+            </div>
+            <h3 class="text-xl font-serif font-bold text-amber-100 group-hover:text-amber-400 transition-colors mb-2">The Labyrinth Gardens</h3>
+            <p class="text-slate-400 text-xs leading-relaxed line-clamp-3 mb-6">
+              A 4,000-year unicursal sanctuary practice. Resets brain hemispheres through rhythmic walking and color engagement, culminating at a tea table under the pergola.
+            </p>
+          </div>
+          <div>
+            <div class="pt-4 border-t border-slate-900 flex items-center justify-between">
+              <span class="text-xs font-semibold text-slate-400">Palette: Calming Tones</span>
+              <button onclick="openModal('labyrinth')" class="text-amber-400 hover:text-amber-300 text-xs font-bold uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Read Essay <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 5: The Chapel Gardens -->
+        <div class="garden-card bg-slate-950 rounded-2xl border border-slate-800 hover:border-amber-500/40 p-6 flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 shadow-xl" data-category="heritage">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-600/30 flex items-center justify-center text-slate-300 text-xl group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-church"></i>
+              </div>
+              <span class="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full bg-slate-700/30 text-slate-300 border border-slate-600/30">1904 Historic Site</span>
+            </div>
+            <h3 class="text-xl font-serif font-bold text-amber-100 group-hover:text-amber-400 transition-colors mb-2">The Chapel Gardens</h3>
+            <p class="text-slate-400 text-xs leading-relaxed line-clamp-3 mb-6">
+              Honoring 1904 Bexar County founders, ranchers, and dairymen. Designed as a sanctuary reflecting Hill Country foothill vegetation and humble country homes.
+            </p>
+          </div>
+          <div>
+            <div class="pt-4 border-t border-slate-900 flex items-center justify-between">
+              <span class="text-xs font-semibold text-slate-400">Theme: Heritage Reflection</span>
+              <button onclick="openModal('chapel')" class="text-amber-400 hover:text-amber-300 text-xs font-bold uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Read Essay <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 6: Gardening School Beds -->
+        <div class="garden-card bg-slate-950 rounded-2xl border border-slate-800 hover:border-amber-500/40 p-6 flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 shadow-xl" data-category="heritage">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-xl bg-amber-950 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-graduation-cap"></i>
+              </div>
+              <span class="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20">Extension Research</span>
+            </div>
+            <h3 class="text-xl font-serif font-bold text-amber-100 group-hover:text-amber-400 transition-colors mb-2">The Gardening School Beds</h3>
+            <p class="text-slate-400 text-xs leading-relaxed line-clamp-3 mb-6">
+              Living classrooms bridging university extension science with hands-on practice. Raised plots, soil building, and propagation for all ages.
+            </p>
+          </div>
+          <div>
+            <div class="pt-4 border-t border-slate-900 flex items-center justify-between">
+              <span class="text-xs font-semibold text-slate-400">Focus: Active Education</span>
+              <button onclick="openModal('children')" class="text-amber-400 hover:text-amber-300 text-xs font-bold uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Read Essay <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-slate-950 border-t border-slate-800 py-12 text-slate-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-amber-600 flex items-center justify-center text-slate-950 font-bold">
+          <i class="fa-solid fa-leaf"></i>
+        </div>
+        <div>
+          <p class="font-cinzel text-sm font-bold text-amber-200">THE GARDENS AT ZION</p>
+          <p class="text-slate-500">Northwest Bexar County • San Antonio, Texas</p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-6 text-slate-400 font-medium">
+        <a href="index.html" class="hover:text-amber-400 transition">Home</a>
+        <a href="the-gardening-school.html" class="hover:text-amber-400 transition">The School</a>
+        <a href="podcast.html" class="hover:text-amber-400 transition">Podcast</a>
+        <a href="resources.html" class="hover:text-amber-400 transition">Resources</a>
+        <a href="contact.html" class="hover:text-amber-400 transition">Contact</a>
+      </div>
+
+      <p class="text-slate-500 text-center md:text-right">&copy; 2026 The Gardens at Zion. All rights reserved.</p>
+    </div>
   </footer>
 
-  <!-- Modal Overlay Structure -->
-  <div id="modal-overlay" onclick="closeModal()" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; z-index:9999; padding:1rem;">
-    <div class="modal-card modal-content" onclick="event.stopPropagation()" style="background:#ffffff; border-radius:12px; width:100%; max-width:650px; max-height:85vh; display:flex; flex-direction:column; overflow:hidden; position:relative; box-shadow:0 20px 25px -5px rgba(0,0,0,0.2);">
-      <!-- Close X Button -->
-      <button onclick="closeModal()" style="position:absolute; top:1rem; right:1rem; border:none; font-size:1.5rem; cursor:pointer; color:#64748b; z-index:10; width:36px; height:36px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:#f1f5f9; transition: background 0.2s;" aria-label="Close modal">&times;</button>
+  <!-- ================= MICHELIN-GRADE MODAL SYSTEM ================= -->
+  <div id="modal-overlay" onclick="closeModal()" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 sm:p-6 md:p-10">
+    <div class="modal-card bg-white text-slate-900 rounded-3xl shadow-2xl max-w-3xl w-full max-h-[90vh] flex flex-col overflow-hidden border border-amber-200/50 relative" onclick="event.stopPropagation()">
       
-      <!-- Scrollable Body Container -->
-      <div class="modal-body" id="modal-body" style="padding:2rem; overflow-y:auto; -webkit-overflow-scrolling:touch; flex:1 1 auto;"></div>
+      <!-- Modal Top Header Bar -->
+      <div class="px-6 py-5 bg-slate-900 text-white flex items-center justify-between border-b border-amber-500/30">
+        <div class="flex items-center gap-3">
+          <div id="modal-icon-container" class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/30 flex items-center justify-center text-amber-400 text-lg">
+            <i id="modal-icon" class="fa-solid fa-leaf"></i>
+          </div>
+          <div>
+            <span class="text-[10px] uppercase font-bold tracking-widest text-amber-400 block">Sanctuary Zone Essay</span>
+            <h3 id="modal-title" class="font-serif text-xl font-bold text-amber-100"></h3>
+          </div>
+        </div>
+
+        <button onclick="closeModal()" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-amber-600 hover:text-slate-950 text-slate-300 flex items-center justify-center text-lg transition-all focus:outline-none" aria-label="Close dialog">
+          &times;
+        </button>
+      </div>
+
+      <!-- Modal Body (Custom Scrollbar & Formatted Essay) -->
+      <div id="modal-body" class="p-6 md:p-8 overflow-y-auto custom-scrollbar flex-1 bg-slate-50 text-slate-800">
+        <!-- Content dynamically injected here -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-4 bg-slate-100 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+        <span class="flex items-center gap-1.5 font-medium"><i class="fa-solid fa-seedling text-amber-700"></i> The Gardens at Zion Master Registry</span>
+        <button onclick="closeModal()" class="px-4 py-2 rounded-lg bg-slate-900 text-amber-200 hover:bg-slate-800 font-semibold transition-colors">Close View</button>
+      </div>
+
     </div>
   </div>
 
-  <!-- JavaScript Logic -->
+  <!-- ================= JAVASCRIPT ENGINE & DATA OBJECTS ================= -->
   <script>
+    /* Complete Botanical Data Objects for All 6 Zones */
     const gardenData = {
       fountain: {
         title: "The Fountain Gardens",
-        icon: "fa-solid fa-fountain",
-        desc: `<p style="margin-bottom: 1rem; line-height: 1.6;">
+        icon: "fa-solid fa-water",
+        iconColor: "text-sky-400",
+        badge: "Full Sun • Water Feature",
+        palette: ["Primary Red Perennials", "Brilliant Yellow Sweeps", "Tranquil Blue Accent Field", "Cascading Border Foliage"],
+        protocol: "Deep soaking cycles; high-calcium clay aeration; organic drench regimen.",
+        desc: `<p class="mb-4 text-slate-700 leading-relaxed text-base">
           Many years ago, I was introduced to French Impressionism through the music of Claude Debussy and Erik Satie, and I found it incredible—from the sparse, elegant simplicity of Satie's <em>Gymnopédie No. 1</em> to the haunting opening flute of Debussy's <em>Prélude à l'après-midi d'un faune</em>. That music led me to the art of Van Gogh and Monet, where I first encountered Monet's garden at Giverny. Though I've only seen videos and studied writings, Giverny became the inspiration behind The Fountain: a central water feature surrounded by sweeping primary fields of red, yellow, and blue.
         </p>
-        <p style="margin-bottom: 0; line-height: 1.6;">
-          As you approach The Fountain Gardens, water flowing over the edges is mirrored by cascading foliage that streams outward across the bed. Human life began in water, Christian life begins at baptism, and all life depends on water; so the fountain serves as a symbol of our origination and the source of our continuation. You are immediately offered a choice: follow the vibrant reds straight ahead or turn toward the brilliant yellows on the left. In the brilliance of the Texas sun, these well-adapted, drought- and heat-tolerant plants radiate with intense warmth, then shift in depth and tone as you move around the bed. The true surprise waits just behind the fountain—a tranquil field of blues. Looking back from the rear of the garden, the fountain aligns almost as a baptismal font, framed by the main sanctuary. From here, another choice awaits: a trip through the Labyrinth, or sitting on a bench in the shade overlooking the valley.
+        <p class="mb-4 text-slate-700 leading-relaxed text-base">
+          As you approach The Fountain Gardens, water flowing over the edges is mirrored by cascading foliage that streams outward across the bed. Human life began in water, Christian life begins at baptism, and all life depends on water; so the fountain serves as a symbol of our origination and the source of our continuation.
+        </p>
+        <p class="text-slate-700 leading-relaxed text-base">
+          You are immediately offered a choice: follow the vibrant reds straight ahead or turn toward the brilliant yellows on the left. In the brilliance of the Texas sun, these well-adapted, drought- and heat-tolerant plants radiate with intense warmth, then shift in depth and tone as you move around the bed. The true surprise waits just behind the fountain—a tranquil field of blues. Looking back from the rear of the garden, the fountain aligns almost as a baptismal font, framed by the main sanctuary. From here, another choice awaits: a trip through the Labyrinth, or sitting on a bench in the shade overlooking the valley.
         </p>`
       },
+
       suzie: {
         title: "Suzie's Garden (The Gazebo Area)",
         icon: "fa-solid fa-seedling",
-        desc: `<p style="margin-bottom: 1rem; line-height: 1.6;">
+        iconColor: "text-emerald-400",
+        badge: "Live Oak Canopy Shade Bed",
+        palette: ["'Black Scallop' Ajuga (Double Ribbon)", "Foxtail Ferns", "'Funky Flow' Mahonia", "Cast Iron Plants", "Burford Holly"],
+        protocol: "Medina 3-in-1 Master Drench (Soil Activator, Hasta Gro, Liquid Seaweed/Humic Acid), 1\" organic compost layer, 2\" hardwood bark mulch.",
+        desc: `<p class="mb-4 text-slate-700 leading-relaxed text-base">
           The Gazebo Gardens is at the end of a shade-covered walk from the parking lot. Over the years, numerous people have walked this sidewalk to conduct business, to plan weddings, baptisms, and final arrangements. The easy, predictable choice would have been boxwoods and various greenery, but I wanted something different. This is a "traditional church," so how could traditional be updated and modernized?
         </p>
-        <p style="margin-bottom: 1rem; line-height: 1.6;">
+        <p class="mb-4 text-slate-700 leading-relaxed text-base">
           The decision was various shades and textures of green that grow in the shade of Live Oak trees—from the wide blades of the Cast Iron plant to the pickle-like texture of the Foxtail ferns, from the red berries buried deeply in the Burford holly to the blue spikes coming up from the deep green Black Scallop Ajuga. Green is the dominant color; green is relaxing to the mind, and green is a color that represents life. In the darkest and coldest winters, it's the greens that give hope for warmer days and new life.
         </p>
-        <p style="margin-bottom: 0; line-height: 1.6;">
+        <p class="text-slate-700 leading-relaxed text-base">
           The colors are subtle—the blues from the 'Black Scallop' Ajuga and the yellows from the 'Funky Flow' Mahonia—weaving a quiet texture beneath the canopy.
         </p>`
       },
-      meadow: { 
-        title: "The Meadow Gardens", 
+
+      meadow: {
+        title: "The Meadow Gardens & Arboretum",
         icon: "fa-solid fa-spa",
-        desc: `<p style="margin-bottom: 1rem; line-height: 1.6;">
+        iconColor: "text-amber-400",
+        badge: "Restoration Prairie & Canopy",
+        palette: ["Warm-Tone Wildflowers", "Rich Purple Salvia Sweeps", "Alkaline-Tolerant Native Canopy", "Autumn Color Deciduous Arboretum"],
+        protocol: "High-calcium clay mycorrhizal inoculation; organic biology rebuilding; moisture-retentive core drenching.",
+        desc: `<p class="mb-4 text-slate-700 leading-relaxed text-base">
           In the not-too-distant past, this space was a field of native yellow wildflowers. Decades of surrounding highway development, church facility expansion, and heavy site construction severely compacted the heavy clay soil, stripping away the wildflowers and their seed, leaving a site where only resilient weeds could take hold.
         </p>
-        <p style="margin-bottom: 1rem; line-height: 1.6;">
+        <p class="mb-4 text-slate-700 leading-relaxed text-base">
           The Meadows design is a deliberate act of land restoration—rebuilding the soil biology while creating a dual-perspective landscape that serves two entirely different audiences.
         </p>
-        <p style="margin-bottom: 1rem; line-height: 1.6;">
-          For the visitor sitting near the church building looking outward, the garden functions as a peaceful, park-like setting. A protective canopy of native and regional trees—specifically chosen for their ability to thrive in alkaline, high-calcium clay—frames the space. Beneath this durable canopy, visitors find comfort, shade, and psychological safety in a secluded, enclosed garden of layered color that buffer the noise and motion of the nearby corridor.
+        <p class="mb-4 text-slate-700 leading-relaxed text-base">
+          For the visitor sitting near the church building looking outward, the garden functions as a peaceful, park-like setting. A protective canopy of native and regional trees—specifically chosen for their ability to thrive in alkaline, high-calcium clay—frames the space. Beneath this durable canopy, visitors find comfort, shade, and psychological safety in a secluded, enclosed garden of layered color that buffers the noise and motion of the nearby corridor.
         </p>
-        <p style="margin-bottom: 1rem; line-height: 1.6;">
+        <p class="mb-4 text-slate-700 leading-relaxed text-base">
           For the driver heading south after a long day's work, the garden offers an unexpected visual interruption. Amidst the visual monotony of concrete, apartments, and commercial strip malls, the eye hits a vivid field of brilliant warm tones and rich purples. Placed at scale, these heat-tolerant sweeps catch the low late-afternoon sunlight, creating a memorable, welcoming sense of "heading home."
         </p>
-        <p style="margin-bottom: 0; line-height: 1.6;">
+        <p class="text-slate-700 leading-relaxed text-base">
           Next to the wildflower field is a dedicated Arboretum. Trees here have been explicitly selected to tolerate regional soil conditions while delivering brilliant, reliable autumn color—adding a distinct seasonality to the landscape as the summer perennials fade.
         </p>`
       },
+
       labyrinth: {
         title: "The Labyrinth Gardens",
         icon: "fa-solid fa-circle-nodes",
-        desc: `<p style="margin-bottom: 1rem; line-height: 1.6;">
+        iconColor: "text-indigo-400",
+        badge: "Unicursal Meditation Sanctuary",
+        palette: ["Soft Blue Perennials", "Calming Pink Blooms", "Warm Yellow Accents", "Pergola Climbing Vines"],
+        protocol: "Low-impact crushed limestone pathway maintenance; organic edging; aromatic herb border protocol.",
+        desc: `<p class="mb-4 text-slate-700 leading-relaxed text-base">
           Labyrinths are an ancient practice with deep roots in human spiritual history and modern neuroscience. Often confused with a maze, a labyrinth is not a puzzle or a place of confusion—it is a sanctuary of intentionality. For over 4,000 years, across diverse ancient cultures and medieval cathedral floors, humans have walked the single, continuous path as a sacred tool for quiet reflection, prayer, and inner restoration. Because there are no dead ends, wrong turns, or decisions to make, the mind is freed from problem-solving, allowing clarity to replace confusion.
         </p>
-        <p style="margin-bottom: 1rem; line-height: 1.6;">
+        <p class="mb-4 text-slate-700 leading-relaxed text-base">
           From a neurological perspective, walking a labyrinth acts as a gentle, physical reset for the brain. The deliberate, rhythmic pace of walking combined with alternating turns engages both the left and right hemispheres of the brain. As you step onto the path, this quiet rhythm shifts the nervous system out of daily stress and "fight-or-flight" vigilance into a restful state.
         </p>
-        <p style="margin-bottom: 1rem; line-height: 1.6;">
+        <p class="mb-4 text-slate-700 leading-relaxed text-base">
           Visual engagement plays an integral role in this balance. As your eyes take in soft blues, calming pinks, and warm yellows along the turns, the brain receives continuous, non-threatening sensory input. Research shows that this visual rhythm lowers heart rate, slows racing thoughts, and helps bring the mind into a meditative focus.
         </p>
-        <p style="margin-bottom: 0; line-height: 1.6;">
+        <p class="text-slate-700 leading-relaxed text-base">
           Benches along the path invite visitors to pause and gaze toward the altar, take in the life of the surrounding gardens, look through the pergola toward the fountain, or simply rest from life's worries. The path leads to the quiet center of the labyrinth, where a table and chairs await—a space set aside for quiet contemplation, deep conversation between friends, or communion with God. Grab a cold glass of tea and sit at the table under the covered pergola.
         </p>`
       },
-      chapel: { 
-        title: "The Chapel Gardens", 
+
+      chapel: {
+        title: "The Chapel Gardens",
         icon: "fa-solid fa-church",
-        desc: `<p style="margin-bottom: 1rem; line-height: 1.6;">
+        iconColor: "text-slate-300",
+        badge: "1904 Historic Reflection Bed",
+        palette: ["Heritage Texas Native Shrubs", "White Reflection Hydrangeas", "Hill Country Wildflower Accents"],
+        protocol: "Organic acidifying drench for heritage beds; native mulch bedding.",
+        desc: `<p class="mb-4 text-slate-700 leading-relaxed text-base">
           I stood inside the original 1904 church, a sanctuary in the "outback" of old Bexar County. I looked at the pictures of the early years, historic artifacts, and simple, personal things that had meaning as deep as the owners' faith. Ranchers, dairymen, cowboys, and ranch hands—people of the earth—they were the founders, and I wondered: how could I honor them in the landscape?
         </p>
-        <p style="margin-bottom: 1rem; line-height: 1.6;">
+        <p class="mb-4 text-slate-700 leading-relaxed text-base">
           What plants would they have seen as they rode horses and buggies down dirt roads and cow paths to Sunday worship? What type of gardens would they have had around their modest country homes? With good soil being scarce and a reliable source of water even scarcer, how could the landscape of those homes at the foothills of the Hill Country be mirrored in the landscape surrounding this now-historic Chapel?
         </p>
-        <p style="margin-bottom: 0; line-height: 1.6;">
+        <p class="text-slate-700 leading-relaxed text-base">
           Could "The Gardens" provide that same sanctuary, that same respite from life's more challenging moments, or that same place to celebrate even life's smallest joys? That was the thinking, the intent, the hope of the landscape surrounding the Historic Chapel.
         </p>`
       },
-      children: { 
-  title: "The Gardening School Beds", 
-  icon: "fa-solid fa-graduation-cap",
-  desc: `<p style="margin-bottom: 1rem; line-height: 1.6;">
-    Designed as living classrooms for practical horticultural study, the Gardening School beds bridge the gap between rigorous university extension science and hands-on community learning. Here, students and volunteers work side-by-side studying soil biology, propagation techniques, and regional plant adaptation tailored specifically to South Central Texas's demanding alkaline clay.
-  </p>
-  <p style="margin-bottom: 1rem; line-height: 1.6;">
-    From container bulb displays to succulent living wall frames, these plots give rising master gardeners and community members the tactile experience needed to master the craft of sustainable gardening.
-  </p>
-  <div style="border-top: 1px solid #e2e8f0; padding-top: 1.25rem; margin-top: 1.25rem; text-align: left;">
-    <a href="the-gardening-school.html" style="display:inline-flex; align-items:center; gap:0.5rem; background-color:#d97706; color:#ffffff; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:600; font-size:0.95rem; transition: all 0.2s;">
-      <span>Explore The Gardening School Page</span>
-      <i class="fa-solid fa-arrow-right text-xs"></i>
-    </a>
-  </div>` 
-}    };
 
+      children: {
+        title: "The Gardening School Beds",
+        icon: "fa-solid fa-graduation-cap",
+        iconColor: "text-amber-400",
+        badge: "Extension Living Laboratory",
+        palette: ["Raised Crop Research Plots", "Succulent Living Walls", "Container Bulb Displays", "Seasonal Demonstration Flora"],
+        protocol: "Texas A&M Extension soil protocol; organic compost aeration; student lab soil trials.",
+        desc: `<p class="mb-4 text-slate-700 leading-relaxed text-base">
+          Designed as living classrooms for practical horticultural study, the Gardening School beds bridge the gap between rigorous university extension science and hands-on community learning. Here, students and volunteers work side-by-side studying soil biology, propagation techniques, and regional plant adaptation tailored specifically to South Central Texas's demanding alkaline clay.
+        </p>
+        <p class="mb-6 text-slate-700 leading-relaxed text-base">
+          From container bulb displays to succulent living wall frames, these plots give rising master gardeners and community members the tactile experience needed to master the craft of sustainable gardening.
+        </p>
+        <div class="border-t border-slate-200 pt-6 mt-4 flex items-center justify-between flex-wrap gap-4">
+          <span class="text-xs text-slate-500 font-medium">Ready to enroll or explore course modules?</span>
+          <a href="the-gardening-school.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold text-xs uppercase tracking-wider transition-all shadow-md">
+            <span>Visit Gardening School</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>`
+      }
+    };
+
+    /* Modal Controller Functions */
     function openModal(key) {
-      const item = gardenData[key];
-      if (!item) return;
+      const data = gardenData[key];
+      if (!data) return;
 
-      document.getElementById('modal-body').innerHTML = `
-        <h3 style="margin-top:0; color:#0f172a; font-family:Georgia, serif; font-size:1.5rem; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem;">
-          <i class="${item.icon}" style="color:#d97706;"></i> ${item.title}
-        </h3>
-        <div style="color:#334155;">${item.desc}</div>
+      // Inject Header & Icon
+      document.getElementById('modal-title').innerText = data.title;
+      const iconEl = document.getElementById('modal-icon');
+      iconEl.className = data.icon + " " + (data.iconColor || "text-amber-400");
+
+      // Build Formatted Essay & Spec Cards
+      let htmlContent = `
+        <div class="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-800 text-xs font-semibold">
+          <i class="fa-solid fa-shield-halved text-amber-600"></i> ${data.badge}
+        </div>
+        
+        <div class="prose prose-slate max-w-none mb-8">
+          ${data.desc}
+        </div>
       `;
-      
-      document.getElementById('modal-overlay').classList.add('active');
+
+      // Append Spec Boxes if Palette exists
+      if (data.palette) {
+        htmlContent += `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-6 border-t border-slate-200">
+            <div class="bg-amber-50/60 p-4 rounded-xl border border-amber-200/60">
+              <h4 class="text-xs uppercase font-bold text-amber-900 tracking-wider mb-2 flex items-center gap-1.5">
+                <i class="fa-solid fa-leaf text-amber-700"></i> Signature Plant Palette
+              </h4>
+              <ul class="text-xs text-slate-700 space-y-1">
+                ${data.palette.map(p => `<li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-600 inline-block"></span> ${p}</li>`).join('')}
+              </ul>
+            </div>
+
+            <div class="bg-slate-100 p-4 rounded-xl border border-slate-200">
+              <h4 class="text-xs uppercase font-bold text-slate-900 tracking-wider mb-2 flex items-center gap-1.5">
+                <i class="fa-solid fa-flask text-slate-700"></i> Soil &amp; Care Protocol
+              </h4>
+              <p class="text-xs text-slate-700 leading-relaxed">${data.protocol}</p>
+            </div>
+          </div>
+        `;
+      }
+
+      document.getElementById('modal-body').innerHTML = htmlContent;
+
+      // Show Overlay
+      const overlay = document.getElementById('modal-overlay');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
-      document.getElementById('modal-overlay').classList.remove('active');
+      const overlay = document.getElementById('modal-overlay');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
     }
 
-    // Keyboard accessibility for Escape key
+    /* Keyboard & Click Outside Handlers */
     document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape') {
-        closeModal();
-      }
+      if (event.key === 'Escape') closeModal();
+    });
+
+    /* Garden Card Filtering System */
+    function filterGardens(category) {
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('active', 'bg-amber-600', 'text-slate-950');
+        btn.classList.add('text-slate-300');
+      });
+      event.target.classList.add('active', 'bg-amber-600', 'text-slate-950');
+      event.target.classList.remove('text-slate-300');
+
+      const cards = document.querySelectorAll('.garden-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    /* Mobile Menu Toggle */
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
     });
   </script>
 </body>

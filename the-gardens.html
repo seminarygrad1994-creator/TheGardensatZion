@@ -135,13 +135,18 @@
       },
       labyrinth: {
         title: "The Labyrinth Gardens",
-        desc: `Labyrinths are an ancient practice with deep roots in human spiritual history and modern neuroscience. Often confused with a maze, a labyrinth is not a puzzle or a place of confusion—it is a sanctuary of intentionality. For over 4,000 years, across diverse ancient cultures and medieval cathedral floors, humans have walked the single, continuous path as a sacred tool for quiet reflection, prayer, and inner restoration. Because there are no dead ends, wrong turns, or decisions to make, the mind is freed from problem-solving, allowing clarity to replace confusion.
-
-From a neurological perspective, walking a labyrinth acts as a gentle, physical reset for the brain. The deliberate, rhythmic pace of walking combined with alternating turns engages both the left and right hemispheres of the brain. As you step onto the path, this quiet rhythm shifts the nervous system out of daily stress and "fight-or-flight" vigilance into a restful state.
-
-Visual engagement plays an integral role in this balance. As your eyes take in soft blues, calming pinks, and warm yellows along the turns, the brain receives continuous, non-threatening sensory input. Research shows that this visual rhythm lowers heart rate, slows racing thoughts, and helps bring the mind into a meditative focus.
-
-Benches along the path invite visitors to pause and gaze toward the altar, take in the life of the surrounding gardens, look through the pergola toward the fountain, or simply rest from life's worries. The path leads to the quiet center of the labyrinth, where a table and chairs await—a space set aside for quiet contemplation, deep conversation between friends, or communion with God. Grab a cold glass of tea and sit at the table under the covered pergola.`
+        desc: `<p style="margin-bottom: 1rem; line-height: 1.6;">
+          Labyrinths are an ancient practice with deep roots in human spiritual history and modern neuroscience. Often confused with a maze, a labyrinth is not a puzzle or a place of confusion—it is a sanctuary of intentionality. For over 4,000 years, across diverse ancient cultures and medieval cathedral floors, humans have walked the single, continuous path as a sacred tool for quiet reflection, prayer, and inner restoration. Because there are no dead ends, wrong turns, or decisions to make, the mind is freed from problem-solving, allowing clarity to replace confusion.
+        </p>
+        <p style="margin-bottom: 1rem; line-height: 1.6;">
+          From a neurological perspective, walking a labyrinth acts as a gentle, physical reset for the brain. The deliberate, rhythmic pace of walking combined with alternating turns engages both the left and right hemispheres of the brain. As you step onto the path, this quiet rhythm shifts the nervous system out of daily stress and "fight-or-flight" vigilance into a restful state.
+        </p>
+        <p style="margin-bottom: 1rem; line-height: 1.6;">
+          Visual engagement plays an integral role in this balance. As your eyes take in soft blues, calming pinks, and warm yellows along the turns, the brain receives continuous, non-threatening sensory input. Research shows that this visual rhythm lowers heart rate, slows racing thoughts, and helps bring the mind into a meditative focus.
+        </p>
+        <p style="margin-bottom: 0; line-height: 1.6;">
+          Benches along the path invite visitors to pause and gaze toward the altar, take in the life of the surrounding gardens, look through the pergola toward the fountain, or simply rest from life's worries. The path leads to the quiet center of the labyrinth, where a table and chairs await—a space set aside for quiet contemplation, deep conversation between friends, or communion with God. Grab a cold glass of tea and sit at the table under the covered pergola.
+        </p>`
       },
       chapel: { 
         title: "The Chapel Gardens", 
@@ -168,7 +173,7 @@ Benches along the path invite visitors to pause and gaze toward the altar, take 
       const item = gardenData[key];
       if (!item) return;
 
-      if (key === 'fountain' || key === 'children' || key === 'meadow' || key === 'chapel') {
+      if (key === 'fountain' || key === 'children' || key === 'meadow' || key === 'chapel' || key === 'labyrinth') {
         document.getElementById('modal-body').innerHTML = `
           <h3 style="margin-top:0; color:#0f172a; font-family:Georgia, serif; font-size:1.5rem; margin-bottom:1rem;">${item.title}</h3>
           <div style="color:#334155;">${item.desc}</div>

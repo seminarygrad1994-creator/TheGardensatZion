@@ -113,7 +113,7 @@
 
         <!-- Two Links at the End -->
         <div style="border-top: 1px solid #e2e8f0; padding-top: 1rem; margin-top: 1rem; display: flex; gap: 1.5rem; flex-wrap: wrap;">
-          <a href="fountain-plant-palette.html" style="color: #d97706; font-weight: 600; text-decoration: underline; font-size: 0.95rem;">
+          <a href="#" onclick="toggleIt('palette-box'); return false;" style="color: #d97706; font-weight: 600; text-decoration: underline; font-size: 0.95rem;">
             1. Plant Palette &rarr;
           </a>
           <a href="#" onclick="toggleIt('soil-box'); return false;" style="color: #d97706; font-weight: 600; text-decoration: underline; font-size: 0.95rem;">
@@ -121,7 +121,17 @@
           </a>
         </div>
 
-        <!-- Hidden Box: Soil Preparation -->
+        <!-- Hidden Box 1: Plant Palette -->
+        <div id="palette-box" style="display: none; margin-top: 1rem; padding: 1rem; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+          <h4 style="margin-bottom: 0.5rem; color: #0f172a; font-weight: bold; font-size: 0.95rem;">Plant Palette</h4>
+          <ul style="margin: 0; padding-left: 1.25rem; list-style-type: disc; color: #334155; font-size: 0.9rem; line-height: 1.5; space-y: 0.5rem;">
+            <li><strong>Red & Warm Sweeps:</strong> Dallas Red Lantana, Firecracker plant, Scarlet Salvia, red salvia greggii, pink salvia greggii, lipstick salvia greggii, dwarf firebush</li>
+            <li><strong>Blue & Purple Sanctuary:</strong> Mystic spires, Henry Duelberg salvia, Blue Plumbago, Nuevo León salvia, purple skullcap</li>
+            <li><strong>Yellow & Gold Accents:</strong> Esperanza, copper Canyon daisy, Mexican Mint Marigold, Texas lantana, 4-nerve daisy</li>
+          </ul>
+        </div>
+
+        <!-- Hidden Box 2: Soil Preparation -->
         <div id="soil-box" style="display: none; margin-top: 1rem; padding: 1rem; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
           <h4 style="margin-bottom: 0.5rem; color: #0f172a; font-weight: bold; font-size: 0.95rem;">Soil Preparation</h4>
           <p style="margin: 0; color: #334155; font-size: 0.9rem; line-height: 1.5;">

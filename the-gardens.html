@@ -103,6 +103,7 @@
   <script>
     const gardenData = {
      fountain: {
+        fountain: {
         title: "The Fountain Gardens",
         desc: `<p style="margin-bottom: 1rem; line-height: 1.6;">
           Many years ago, I was introduced to French Impressionism through the music of Claude Debussy and Erik Satie, and I found it incredible—from the sparse, elegant simplicity of Satie's <em>Gymnopédie No. 1</em> to the haunting opening flute of Debussy's <em>Prélude à l'après-midi d'un faune</em>. That music led me to the art of Van Gogh and Monet, where I first encountered Monet's garden at Giverny. Though I've only seen videos and studied writings, Giverny became the inspiration behind The Fountain: a central water feature surrounded by sweeping primary fields of red, yellow, and blue.
@@ -113,12 +114,12 @@
 
         <!-- Two Clean Links at the End -->
         <div style="border-top: 1px solid #e2e8f0; padding-top: 1rem; margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 1rem;">
-          <a href="#plant-palette-fountain" onclick="toggleSection('fountain-palette'); return false;" style="color: #d97706; font-weight: 600; text-decoration: underline; font-size: 0.95rem; cursor: pointer;">
+          <button type="button" onclick="toggleGardenDetails('fountain-palette')" style="background: none; border: none; padding: 0; color: #d97706; font-weight: 600; text-decoration: underline; font-size: 0.95rem; cursor: pointer;">
             1. Plant Palette &rarr;
-          </a>
-          <a href="#soil-protocol-fountain" onclick="toggleSection('fountain-protocol'); return false;" style="color: #d97706; font-weight: 600; text-decoration: underline; font-size: 0.95rem; cursor: pointer;">
+          </button>
+          <button type="button" onclick="toggleGardenDetails('fountain-protocol')" style="background: none; border: none; padding: 0; color: #d97706; font-weight: 600; text-decoration: underline; font-size: 0.95rem; cursor: pointer;">
             2. How the Gardens Were Built &rarr;
-          </a>
+          </button>
         </div>
 
         <!-- Hidden Section 1: Plant Palette -->

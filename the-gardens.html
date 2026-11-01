@@ -102,44 +102,17 @@
   <!-- JavaScript Logic -->
   <script>
     const gardenData = {
-     fountain: {
-        fountain: {
+      fountain: {
         title: "The Fountain Gardens",
+        icon: "fa-solid fa-fountain",
         desc: `<p style="margin-bottom: 1rem; line-height: 1.6;">
           Many years ago, I was introduced to French Impressionism through the music of Claude Debussy and Erik Satie, and I found it incredible—from the sparse, elegant simplicity of Satie's <em>Gymnopédie No. 1</em> to the haunting opening flute of Debussy's <em>Prélude à l'après-midi d'un faune</em>. That music led me to the art of Van Gogh and Monet, where I first encountered Monet's garden at Giverny. Though I've only seen videos and studied writings, Giverny became the inspiration behind The Fountain: a central water feature surrounded by sweeping primary fields of red, yellow, and blue.
         </p>
-        <p style="margin-bottom: 1.25rem; line-height: 1.6;">
+        <p style="margin-bottom: 0; line-height: 1.6;">
           As you approach The Fountain Gardens, water flowing over the edges is mirrored by cascading foliage that streams outward across the bed. Human life began in water, Christian life begins at baptism, and all life depends on water; so the fountain serves as a symbol of our origination and the source of our continuation. You are immediately offered a choice: follow the vibrant reds straight ahead or turn toward the brilliant yellows on the left. In the brilliance of the Texas sun, these well-adapted, drought- and heat-tolerant plants radiate with intense warmth, then shift in depth and tone as you move around the bed. The true surprise waits just behind the fountain—a tranquil field of blues. Looking back from the rear of the garden, the fountain aligns almost as a baptismal font, framed by the main sanctuary. From here, another choice awaits: a trip through the Labyrinth, or sitting on a bench in the shade overlooking the valley.
-        </p>
-
-        <!-- Interactive Disclosure Links -->
-        <div style="border-top: 1px solid #e2e8f0; padding-top: 1rem; margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 1rem;">
-          <button type="button" onclick="toggleDetails(this, 'fountain-palette')" style="background: none; border: none; padding: 0; color: #d97706; font-weight: 600; text-decoration: underline; font-size: 0.95rem; cursor: pointer;">
-            1. Plant Palette &rarr;
-          </button>
-          <button type="button" onclick="toggleDetails(this, 'fountain-protocol')" style="background: none; border: none; padding: 0; color: #d97706; font-weight: 600; text-decoration: underline; font-size: 0.95rem; cursor: pointer;">
-            2. How the Gardens Were Built &rarr;
-          </button>
-        </div>
-
-        <!-- Hidden Section 1: Plant Palette -->
-        <div class="fountain-palette" style="display: none; margin-top: 1rem; padding: 1rem; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-          <h4 style="margin-bottom: 0.5rem; color: #0f172a; font-weight: bold; font-size: 0.95rem;">Plant Palette</h4>
-          <ul style="margin: 0; padding-left: 1.25rem; list-style-type: disc; color: #334155; font-size: 0.9rem; line-height: 1.5;">
-            <li><strong>Red & Warm Sweeps:</strong> Dallas Red Lantana, Firecracker Plant, Scarlet Salvia, Red Salvia greggii, Pink Salvia greggii, 'Lipstick' Salvia greggii, Dwarf Firebush</li>
-            <li><strong>Blue & Purple Sanctuary:</strong> Mystic Spires Salvia, Henry Duelberg Salvia, Blue Plumbago, Nuevo León Salvia, Purple Skullcap</li>
-            <li><strong>Yellow & Gold Accents:</strong> Esperanza, Copper Canyon Daisy, Mexican Mint Marigold, Texas Lantana, Four-Nerve Daisy</li>
-          </ul>
-        </div>
-
-        <!-- Hidden Section 2: Soil & Construction Protocol -->
-        <div class="fountain-protocol" style="display: none; margin-top: 1rem; padding: 1rem; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-          <h4 style="margin-bottom: 0.5rem; color: #0f172a; font-weight: bold; font-size: 0.95rem;">How the Gardens Were Built (Soil Protocol)</h4>
-          <p style="margin: 0; color: #334155; font-size: 0.9rem; line-height: 1.5;">
-            The bed was outlined with 10" of single-shredded mulch, then filled with 1" of native Edwards Plateau soil, 2" of enriched topsoil, and 4" of molasses-based compost.
-          </p>
-        </div>`
-      },      suzie: {
+        </p>`
+      },
+      suzie: {
         title: "Suzie's Garden (The Gazebo Area)",
         icon: "fa-solid fa-seedling",
         desc: `<p style="margin-bottom: 1rem; line-height: 1.6;">
